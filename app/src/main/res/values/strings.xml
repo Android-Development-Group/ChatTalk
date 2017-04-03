@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">ChatAssistant</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
+    <string name="close">关闭</string>
+    <string name="refresh">刷新</string>
+    <string name="save">保存</string>
+    <string name="result_confirm">确定</string>
+    <string name="complete">完成</string>
+    <string name="retry">重试</string>
+    <string name="sync">同步</string>
+    <string name="setting">设置</string>
+    <string name="cache">缓存</string>
+    <string name="manager">管理</string>
+    <string name="submit">提交</string>
+    <string name="detail">详情</string>
+    <string name="qrcode">二维码</string>
+    <string name="delete">删除</string>
+    <string name="next">下一步</string>
+    <string name="no_network_tips">您的网络不给力，请稍后重试</string>
+    <string name="upload_success">上传成功</string>
+    <string name="upload_failed">上传失败</string>
+    <string name="save_success">保存成功</string>
+    <string name="save_fail">保存失败</string>
+    <string name="requests">请求</string>
+    <string name="notifications">通知</string>
+    <string name="aboutus">关于我们</string>
+    <string name="delete_success">删除成功!</string>
+    <string name="delete_failed">删除失败!</string>
+
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+
+
+</resources>
