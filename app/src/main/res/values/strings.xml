@@ -32,4 +32,14 @@
     <string name="register">注册</string>
 
 
+    <string name="tab_chat">会话</string>
+    <string name="tab_contacts">通讯录</string>
+    <string name="tab_discover">发现</string>
+    <string name="tab_me">我</string>
+
+    <string name="mine_user_portrait">用户头像</string>
+    <string name="mine_about">关于 ChatTalk</string>
+    <string name="mine_service">意见反馈</string>
+    <string name="mine_setting">账号设置</string>
+
 </resources>

@@ -3,6 +3,8 @@
 --
 
 #### 这个是打包所有渠道release版本 
+--gradlew assemble
+
 --gradlew assembleRelease
 
 
