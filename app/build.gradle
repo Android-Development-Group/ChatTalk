@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'bugly'
 
 android {
     compileSdkVersion 23
@@ -84,6 +85,11 @@ android {
         }
     }
 }
+
+//bugly {
+//    appId = "8cb683e78e"
+//    appKey = "1bca6875-a1d4-4292-bd32-79a7045bf9a9"
+//}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
