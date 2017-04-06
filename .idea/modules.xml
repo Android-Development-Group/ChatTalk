@@ -4,9 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ChatTalk.iml" filepath="$PROJECT_DIR$/ChatTalk.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/chat_assistant.iml" filepath="$PROJECT_DIR$/chat_assistant.iml" />
-      <module fileurl="file://$PROJECT_DIR$/chatlibrary/chatlibrary.iml" filepath="$PROJECT_DIR$/chatlibrary/chatlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/chatlibrary/chatlibrary.iml" filepath="$PROJECT_DIR$/chatlibrary/chatlibrary.iml" />
     </modules>
   </component>

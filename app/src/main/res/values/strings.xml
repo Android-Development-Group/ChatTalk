@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChatAssistant</string>
+    <string name="app_name">ChatTalk</string>
     <string name="cancel">取消</string>
     <string name="confirm">确认</string>
     <string name="close">关闭</string>

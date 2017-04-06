@@ -8,7 +8,6 @@ import com.jusenr.chatlibrary.controller.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by T5-Jusenr on 2017/4/4.
@@ -18,7 +17,6 @@ public class ContactsFragment extends BaseFragment {
 
     @BindView(R.id.tv_test)
     TextView mTvTest;
-    Unbinder unbinder;
 
     @Override
     protected int getLayoutId() {

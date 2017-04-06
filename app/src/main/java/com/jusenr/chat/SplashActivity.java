@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import com.tencent.bugly.beta.Beta;
+
 //import com.jusenr.chat.guidance.GuidanceActivity;
 
 /**
@@ -35,6 +37,7 @@ public class SplashActivity extends AppCompatActivity {
 //                    AccountHelper.login();
 //                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
 //                }
+                Beta.checkUpgrade(false,false);
                 finish();
             }
         }, 2000);
