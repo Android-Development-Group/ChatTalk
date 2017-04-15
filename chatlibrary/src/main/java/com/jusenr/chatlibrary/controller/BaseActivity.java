@@ -44,11 +44,9 @@ public abstract class BaseActivity<App extends BaseApplication> extends AppCompa
     private long exitTime = 0;
 
     /**
-     * 设置布局id
-     *
-     * @return 布局id
+     * 设置布局
      */
-    protected abstract int getLayoutId();
+    protected abstract void setContentView();
 
     /**
      * 布局初始化完成的回调
@@ -65,11 +63,7 @@ public abstract class BaseActivity<App extends BaseApplication> extends AppCompa
     @Override
     final protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int layoutId = getLayoutId();
-        if (layoutId == 0)
-            throw new RuntimeException("找不到Layout资源,Fragment初始化失败!");
-        setContentView(layoutId);
-
+        setContentView();
         ButterKnife.bind(this);
         mContext = this;
 

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import com.jusenr.chat.account.AccountHelper;
 import com.tencent.bugly.beta.Beta;
 
 //import com.jusenr.chat.guidance.GuidanceActivity;
@@ -31,12 +32,12 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
-//                if (!AccountHelper.isLogin()) {
+                if (!AccountHelper.isLogin()) {
 //                    startActivity(new Intent(SplashActivity.this, GuidanceActivity.class));
-//                } else {
-//                    AccountHelper.login();
-//                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-//                }
+                } else {
+                    AccountHelper.login();
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                }
                 Beta.checkUpgrade(false,false);
                 finish();
             }

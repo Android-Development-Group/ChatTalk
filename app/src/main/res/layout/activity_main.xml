@@ -6,7 +6,7 @@
 
     <include layout="@layout/layout_top"/>
 
-    <android.support.v4.view.ViewPager
+    <com.jusenr.chatlibrary.view.viewpager.UnScrollableViewPager
         android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

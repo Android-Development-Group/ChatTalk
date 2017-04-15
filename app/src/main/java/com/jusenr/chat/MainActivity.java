@@ -80,8 +80,8 @@ public class MainActivity extends BaseActivity implements
     private List<Fragment> mFragment = new ArrayList<>();
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
+    protected void setContentView() {
+        setContentView(R.layout.activity_main);
     }
 
     @Override
