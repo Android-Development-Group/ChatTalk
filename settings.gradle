@@ -1,1 +1,1 @@
-include ':app', ':chatlibrary'
+include ':app', ':chatlibrary', ':IMLib', ':IMKit', ':CallLib', ':CallKit'

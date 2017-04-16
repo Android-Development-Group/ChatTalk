@@ -1,4 +1,4 @@
-package com.jusenr.chat;
+package com.jusenr.chat.guidance;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import com.jusenr.chat.MainActivity;
+import com.jusenr.chat.R;
 import com.jusenr.chat.account.AccountHelper;
 import com.tencent.bugly.beta.Beta;
 
