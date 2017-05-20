@@ -42,4 +42,23 @@
     <string name="mine_service">意见反馈</string>
     <string name="mine_setting">账号设置</string>
 
+
+    <!--6.0+权限请求提示-->
+    <string name="permission_tips_write_sdcard">写入SDard的权限被拒绝</string>
+    <string name="permission_tips_open_camera">打开相机的权限被拒绝</string>
+    <string name="permission_button_item_agree">我同意</string>
+    <string name="permission_button_item_refuse">我拒绝</string>
+
+    <!--扫描页面提示-->
+    <string name="qrcode_please_scan_product">请扫描葡萄产品的二维码！</string>
+    <string name="qrcode_please_scan_child">找不到孩子，请扫描孩子二维码！</string>
+    <string name="qrcode_not_find_please_scan_product">找不到产品，请扫描产品二维码！</string>
+    <string name="qrcode_please_scan">请扫描</string>
+    <string name="qrcode_thiz">的二维码</string>
+    <string name="qrcode_assistlogin_success">已完成，记得每天来看看孩子的成长数值哦！</string>
+    <string name="qrcode_manage_to_companion">您已经是这个孩子的管理员了，是否跳转孩子页面？</string>
+    <string name="qrcode_scan_correct_qrcode">请扫描正确的二维码</string>
+    <string name="qrcode_has_expired">二维码已过期</string>
+    <string name="qrcode_has_error">二维码错误</string>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.jusenr.chat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,9 +20,12 @@ import com.jusenr.chat.home.ConversationFragment;
 import com.jusenr.chat.home.DiscoverFragment;
 import com.jusenr.chat.home.MineFragment;
 import com.jusenr.chat.jninative.NativeContent;
+import com.jusenr.chat.qrcode.QRActivity;
+import com.jusenr.chat.utils.PermissionsUtils;
 import com.jusenr.chatlibrary.controller.BaseActivity;
 import com.jusenr.chatlibrary.utils.ToastUtils;
 import com.jusenr.chatlibrary.view.DragPointView;
+import com.yanzhenjie.permission.AndPermission;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -165,6 +169,19 @@ public class MainActivity extends BaseActivity implements
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case PermissionsUtils.REQUEST_CODE_SETTING:
+                if (AndPermission.hasPermission(this, Manifest.permission.CAMERA)) {
+                    startScan();
+                } else {
+                    ToastUtils.showToastShort(this, getString(R.string.permission_tips_open_camera));
+                }
+                break;
+        }
+    }
 
     long firstClick = 0;
     long secondClick = 0;
@@ -202,6 +219,7 @@ public class MainActivity extends BaseActivity implements
                 mMineRed.setVisibility(View.GONE);
                 break;
             case R.id.seal_more:
+                apply();
                 break;
             case R.id.ac_iv_search:
                 break;
@@ -221,5 +239,29 @@ public class MainActivity extends BaseActivity implements
         mSealNum.setVisibility(View.GONE);
         ToastUtils.showToastShort(mContext, "清除成功");
 
+    }
+
+    public void apply() {
+        PermissionsUtils requestPermissions = PermissionsUtils.requestPermissions(this, new PermissionsUtils.PermissionsListener() {
+            @Override
+            public void onRequestPermissionSuccessful(int requestCode, List<String> permissions) {
+                if (AndPermission.hasPermission(mContext, Manifest.permission.CAMERA)) {
+                    startScan();
+                }
+            }
+
+            @Override
+            public void onRequestPermissionFailure(int requestCode, List<String> deniedPermissions) {
+                if (!AndPermission.hasPermission(mContext, Manifest.permission.CAMERA)) {
+                    ToastUtils.showToastShort(mContext, getString(R.string.permission_tips_open_camera));
+                    PermissionsUtils.defineSettingDialog(MainActivity.this, deniedPermissions);
+                }
+            }
+        });
+        requestPermissions.requestCamera(true);
+    }
+
+    private void startScan() {
+        startActivity(new Intent(this, QRActivity.class));
     }
 }

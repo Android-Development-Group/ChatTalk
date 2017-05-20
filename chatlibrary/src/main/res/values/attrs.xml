@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--NavigationBar-->
+    <declare-styleable name="NavigationBar">
+        <attr name="nav_left_icon" format="reference"/>
+        <attr name="nav_right_icon" format="reference"/>
+        <attr name="nav_main_title" format="string"/>
+        <attr name="nav_main_title_color" format="color"/>
+        <attr name="nav_dis_main_title_color" format="color"/>
+        <attr name="nav_main_title_size" format="dimension|reference"/>
+        <attr name="nav_left_title" format="string"/>
+        <attr name="nav_left_title_color" format="color"/>
+        <attr name="nav_dis_left_title_color" format="color"/>
+        <attr name="nav_left_title_size" format="dimension|reference"/>
+        <attr name="nav_right_title" format="string"/>
+        <attr name="nav_right_title_color" format="color"/>
+        <attr name="nav_dis_right_title_color" format="color"/>
+        <attr name="nav_right_title_size" format="dimension|reference"/>
+        <attr name="nav_divider_color" format="color"/>
+        <attr name="nav_has_divider" format="boolean"/>
+        <attr name="nav_has_right_title_icon" format="boolean"/>
+        <attr name="nav_right_title_indicator_background" format="reference"/>
+        <attr name="nav_right_title_icon_text_color" format="color"/>
+    </declare-styleable>
+
+    <!--CleanableEditText-->
+    <declare-styleable name="CleanableEditText">
+        <attr name="maxLength" format="integer"/>
+    </declare-styleable>
+
+    <!--BaseRecyclerView-->
+    <declare-styleable name="BaseRecyclerView">
+        <attr name="layoutMode" format="enum">
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+            <enum name="invalid_offset" value="2"/>
+            <enum name="grid" value="3"/>
+        </attr>
+        <attr name="columnCount" format="integer"/>
+        <attr name="row_divider" format="boolean"/>
+        <attr name="span_divider" format="boolean"/>
+        <attr name="divider_width" format="dimension"/>
+        <attr name="divider_height" format="dimension"/>
+        <attr name="divider_marginLeft" format="dimension"/>
+        <attr name="divider_marginRight" format="dimension"/>
+        <attr name="divider_marginTop" format="dimension"/>
+        <attr name="divider_marginBottom" format="dimension"/>
+        <attr name="divider_color" format="color"/>
+        <attr name="inner" format="boolean"/>
+    </declare-styleable>
+
+    <!--QRScanView-->
+    <declare-styleable name="QRScanView">
+        <attr name="inWidth" format="dimension"/>
+        <attr name="inHeight" format="dimension"/>
+        <attr name="inRadius" format="dimension"/>
+        <attr name="qrBackgroundColor" format="color"/>
+        <attr name="isPorterDuffMode" format="boolean"/>
+    </declare-styleable>
+</resources>

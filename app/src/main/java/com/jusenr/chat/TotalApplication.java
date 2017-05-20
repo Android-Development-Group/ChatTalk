@@ -1,12 +1,16 @@
 package com.jusenr.chat;
 
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.jusenr.chatlibrary.controller.ActivityManager;
 import com.jusenr.chatlibrary.controller.BaseApplication;
 import com.jusenr.chatlibrary.utils.Logger;
 import com.jusenr.chatlibrary.utils.SDCardUtils;
+import com.jusenr.chatlibrary.view.fresco.ImagePipelineFactory;
 
 import java.io.File;
+
+import okhttp3.OkHttpClient;
 
 /**
  * TotalApplication
@@ -27,6 +31,9 @@ public class TotalApplication extends BaseApplication {
             System.out.println("Create-" + getSdCardPath() + ":===================>" + isSuccess);
         }
 
+        Fresco.initialize(getApplicationContext(),
+                ImagePipelineFactory.imagePipelineConfig(getApplicationContext(),
+                        new OkHttpClient()));
 
     }
 

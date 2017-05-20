@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_select">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="@dimen/margin_big">
+
+        <!--孩子昵称-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="孩子昵称"
+            android:textColor="@color/text_color_313131"
+            android:textSize="18sp"/>
+
+        <com.jusenr.chatlibrary.view.CleanableEditText
+            android:id="@+id/et_nickname"
+            style="@style/TalkText.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_register_sel"
+            android:drawableRight="@drawable/close_selector"
+            android:gravity="center_vertical"
+            android:hint="请输入..."
+            android:imeOptions="actionDone"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/text_color_313131"
+            android:textColorHint="@color/color_C2C2C2"
+            android:textSize="@dimen/text_size_16sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_register_sel"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="@color/theme"
+                android:textSize="@dimen/text_size_16sp"/>
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_login_sel"
+                android:gravity="center"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

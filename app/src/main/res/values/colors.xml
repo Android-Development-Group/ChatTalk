@@ -14,4 +14,42 @@
     <color name="mine_head_color">#cccccc</color>
     <color name="text_color">#353535</color>
 
+    <color name="transparent">@android:color/transparent</color>
+    <color name="divider_color">#E1E1E1</color>
+    <color name="blue">#0076FF</color>
+    <color name="theme">#37C221</color>
+    <color name="gray">#959595</color>
+    <color name="black">#000</color>
+    <color name="light_gray_black">#646464</color>
+    <color name="gray_black">#333333</color>
+
+    <color name="color_D2D2D2">#D2D2D2</color>
+    <color name="color_white">#ffffff</color>
+    <color name="color_5C5C5C">#5C5C5C</color>
+    <color name="color_EBEBEB">#EBEBEB</color>
+    <color name="color_black">#000000</color>
+    <color name="color_C2C2C2">#C2C2C2</color>
+    <color name="color_007AFF">#007AFF</color>
+
+
+    <color name="text_main_color_sel">#B57DE4</color>
+    <color name="text_main_color_nor">#985EC9</color>
+    <color name="text_main_color">#37C221</color>
+    <color name="text_color_white">#FFFFFF</color>
+    <color name="text_color_red">#CD5564</color>
+    <color name="text_color_gray">#959595</color>
+    <color name="text_color_black">#000000</color>
+    <color name="text_color_ddffffff">#ddffffff</color>
+    <color name="text_color_ED5564">#ED5564</color>
+    <color name="text_color_313131">#313131</color>
+    <color name="text_color_submit">#DBE1E3</color>
+    <color name="text_color_646464">#646464</color>
+    <color name="text_color_B5B5B5">#B5B5B5</color>
+    <color name="text_color_9B9B9B">#9B9B9B</color>
+    <color name="text_alpha_80">#C000</color>
+    <color name="colorDivider">#d8d8d8</color>
+
+    <color name="background_main_color">#EBEBEB</color>
+
+
 </resources>

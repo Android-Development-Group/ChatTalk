@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
 
-    <!--SDCard相关-->
+    <!-- SDCard相关 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <!-- 查看 Wi-Fi 状态 -->
@@ -28,11 +28,10 @@
     <!-- 防止设备休眠 -->
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
-    <!--获取联系人信息，demo中演示发送通讯录消息-->
+    <!-- 获取联系人信息，demo中演示发送通讯录消息 -->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-
 
     <application
         android:name=".TotalApplication"
@@ -60,21 +59,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            <!--
-             <intent-filter>
-                 <action android:name="android.intent.action.VIEW"/>
 
-                 <category android:name="android.intent.category.DEFAULT"/>
-                 <category android:name="android.intent.category.BROWSABLE"/>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
 
-                 <data
-                     android:host="newsapp"
-                     android:scheme="news"/>
-             </intent-filter>
-            -->
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:host="putao"
+                    android:scheme="ptpad"/>
+            </intent-filter>
+
         </activity>
 
         <!-- ***************************************  ↓  *************************************** -->
+
 
         <!-- 友盟 -->
         <meta-data
@@ -84,42 +84,25 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}"/>
 
-
-        <!--Bugly-->
-        <activity
-            android:name="com.tencent.bugly.beta.ui.BetaActivity"
-            android:theme="@android:style/Theme.Translucent"/>
-
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.fileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
-        </provider>
-
-
         <!-- ***************************************  ↑  *************************************** -->
 
+
         <!-- 测试 -->
-        <!--<activity-->
-        <!--android:name=".TestActivity"-->
-        <!--android:label="@string/title_activity_test"/>-->
+        <!-- <activity -->
+        <!-- android:name=".TestActivity" -->
+        <!-- android:label="@string/title_activity_test"/> -->
         <!-- 登录 -->
-        <!--<activity-->
-        <!--android:name=".user.LoginActivity"-->
-        <!--android:label="@string/title_activity_login"/>-->
+        <!-- <activity -->
+        <!-- android:name=".user.LoginActivity" -->
+        <!-- android:label="@string/title_activity_login"/> -->
         <!-- 注册 -->
-        <!--<activity-->
-        <!--android:name=".user.RegisterActivity"-->
-        <!--android:label="@string/title_activity_register"/>-->
+        <!-- <activity -->
+        <!-- android:name=".user.RegisterActivity" -->
+        <!-- android:label="@string/title_activity_register"/> -->
         <!-- 忘记密码 -->
-        <!--<activity-->
-        <!--android:name=".user.ForgetPasswordActivity"-->
-        <!--android:label="@string/title_activity_forgetpassword"/>-->
+        <!-- <activity -->
+        <!-- android:name=".user.ForgetPasswordActivity" -->
+        <!-- android:label="@string/title_activity_forgetpassword"/> -->
         <!-- NewsApp主页 -->
         <activity
             android:name=".MainActivity"
@@ -129,9 +112,11 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <!-- 引导页 -->
-        <!--<activity-->
-        <!--android:name=".guidance.GuidanceActivity"-->
-        <!--android:label="@string/title_activity_guidance"/>-->
+        <!-- <activity -->
+        <!-- android:name=".guidance.GuidanceActivity" -->
+        <!-- android:label="@string/title_activity_guidance"/> -->
+        <activity android:name=".qrcode.QRActivity"/>
+        <activity android:name=".qrcode.QRResultActivity"/>
 
     </application>
 

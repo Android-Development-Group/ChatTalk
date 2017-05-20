@@ -9,7 +9,7 @@
         <provider providerId="com.vladsch.idea.multimarkdown.editor.swing.html.panel" providerName="Default - Swing" />
       </PanelProvider>
     </PreviewSettings>
-    <ParserSettings>
+    <ParserSettings gitHubSyntaxChange="false">
       <PegdownExtensions>
         <option name="ABBREVIATIONS" value="false" />
         <option name="ANCHORLINKS" value="true" />
@@ -17,6 +17,7 @@
         <option name="ATXHEADERSPACE" value="true" />
         <option name="AUTOLINKS" value="true" />
         <option name="DEFINITIONS" value="false" />
+        <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false" />
         <option name="FENCED_CODE_BLOCKS" value="true" />
         <option name="FOOTNOTES" value="false" />
         <option name="HARDWRAPS" value="false" />
@@ -125,6 +126,9 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\T5\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="masterDetails">
     <states>
