@@ -2,7 +2,6 @@ package com.jusenr.chat.guidance;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
@@ -11,6 +10,12 @@ import com.jusenr.chat.MainActivity;
 import com.jusenr.chat.R;
 import com.jusenr.chat.account.AccountHelper;
 import com.tencent.bugly.beta.Beta;
+
+import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 //import com.jusenr.chat.guidance.GuidanceActivity;
 
@@ -30,19 +35,21 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                if (!AccountHelper.isLogin()) {
+        Observable.timer(5000, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.computation())
+                .subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long time) {
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        if (!AccountHelper.isLogin()) {
 //                    startActivity(new Intent(SplashActivity.this, GuidanceActivity.class));
-                } else {
-                    AccountHelper.login();
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                }
-                Beta.checkUpgrade(false,false);
-                finish();
-            }
-        }, 2000);
+                        } else {
+                            AccountHelper.login();
+                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        }
+                        Beta.checkUpgrade(false, false);
+                        finish();
+                    }
+                });
     }
 }

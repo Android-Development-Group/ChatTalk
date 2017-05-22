@@ -1,9 +1,7 @@
 package com.jusenr.chat.scanner;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -71,19 +69,8 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
     private Executor mQrCodeExecutor;
     private Handler mHandler;
 
-    private static Intent createIntent(Context context) {
-        Intent i = new Intent(context, ScanQrCodeActivity.class);
-        return i;
-    }
-
-    public static void launch(Context context) {
-        Intent i = createIntent(context);
-        context.startActivity(i);
-    }
-
     @Override
     protected void setContentView() {
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_qr_code);
     }
 
@@ -95,7 +82,7 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
         initData();
     }
 
-    private void checkPermission() {
+    /*private void checkPermission() {
         boolean hasHardware = checkCameraHardWare(this);
         if (hasHardware) {
             if (!hasCameraPermission()) {
@@ -103,16 +90,17 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
                 mQrCodeFinderView.setVisibility(View.GONE);
                 mPermissionOk = false;
             } else {
-                mPermissionOk = true;
+            mPermissionOk = true;
             }
         } else {
             mPermissionOk = false;
             finish();
         }
-    }
+    }*/
 
     private void initView() {
         mNavigation_bar.setMainTitleColor(Color.WHITE);
+        mNavigation_bar.setRightTitleColor(Color.WHITE);
         mIvFlashLight = (ImageView) findViewById(R.id.qr_code_iv_flash_light);
         mTvFlashLightText = (TextView) findViewById(R.id.qr_code_tv_flash_light);
         mQrCodeFinderView = (QrCodeFinderView) findViewById(R.id.qr_code_view_finder);
@@ -129,19 +117,19 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
         mHandler = new WeakHandler(this);
     }
 
-    private boolean hasCameraPermission() {
+    /*private boolean hasCameraPermission() {
         PackageManager pm = getPackageManager();
         return PackageManager.PERMISSION_GRANTED == pm.checkPermission("android.permission.CAMERA", getPackageName());
-    }
+    }*/
 
     @Override
     protected void onResume() {
         super.onResume();
-        checkPermission();
-        if (!mPermissionOk) {
-            mDecodeManager.showPermissionDeniedDialog(this);
-            return;
-        }
+//        checkPermission();
+//        if (!mPermissionOk) {
+//            mDecodeManager.showPermissionDeniedDialog(this);
+//            return;
+//        }
         SurfaceHolder surfaceHolder = mSurfaceView.getHolder();
         turnFlashLightOff();
         if (mHasSurface) {
@@ -212,7 +200,7 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
             mDecodeManager.showPermissionDeniedDialog(this);
             return;
         }
-        mQrCodeFinderView.setVisibility(View.VISIBLE);
+//        mQrCodeFinderView.setVisibility(View.VISIBLE);
         mSurfaceView.setVisibility(View.VISIBLE);
         mLlFlashLight.setVisibility(View.VISIBLE);
         findViewById(R.id.qr_code_view_background).setVisibility(View.GONE);
@@ -233,10 +221,10 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
     }
 
     /* 检测相机是否存在 */
-    private boolean checkCameraHardWare(Context context) {
+  /*  private boolean checkCameraHardWare(Context context) {
         PackageManager packageManager = context.getPackageManager();
         return packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA);
-    }
+    }*/
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
@@ -310,11 +298,12 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
     @Override
     public void onRightAction() {
         super.onRightAction();
-        if (!hasCameraPermission()) {
-            mDecodeManager.showPermissionDeniedDialog(this);
-        } else {
-            openSystemAlbum();
-        }
+        openSystemAlbum();
+//        if (!hasCameraPermission()) {
+//            mDecodeManager.showPermissionDeniedDialog(this);
+//        } else {
+//            openSystemAlbum();
+//        }
     }
 
     private void openSystemAlbum() {
