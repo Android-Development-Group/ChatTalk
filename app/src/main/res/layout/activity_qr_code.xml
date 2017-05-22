@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+    <!--标题栏-->
+    <com.jusenr.chatlibrary.view.NavigationBar
+        style="@style/style_navigation_bar"
+        android:background="@color/color_7F7F7F"
+        app:nav_left_icon="@drawable/back_selector_white"
+        app:nav_main_title="扫一扫"
+        app:nav_right_title="相册"
+        app:nav_right_title_color="@color/color_EBEBEB"/>
+
+    <SurfaceView
+        android:id="@+id/qr_code_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/navigation_bar"
+        android:layout_gravity="center"
+        android:visibility="visible"/>
+
+    <com.jusenr.chat.scanner.view.QrCodeFinderView
+        android:id="@+id/qr_code_view_finder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/navigation_bar"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/qr_code_ll_flash_light"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/qr_code_flashlight_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/qr_code_iv_flash_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/flashlight_turn_on"/>
+
+        <TextView
+            android:id="@+id/qr_code_tv_flash_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp"
+            android:text="@string/qr_code_open_flash_light"
+            android:textColor="@color/qr_code_flash_light_text_color"
+            android:textSize="@dimen/text_size_14sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/qr_code_view_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/navigation_bar"
+        android:background="@android:color/black"
+        android:visibility="gone"/>
+
+</RelativeLayout>

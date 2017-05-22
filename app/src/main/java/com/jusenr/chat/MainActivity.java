@@ -21,6 +21,7 @@ import com.jusenr.chat.home.DiscoverFragment;
 import com.jusenr.chat.home.MineFragment;
 import com.jusenr.chat.jninative.NativeContent;
 import com.jusenr.chat.qrcode.QRActivity;
+import com.jusenr.chat.scanner.ScanQrCodeActivity;
 import com.jusenr.chat.utils.PermissionsUtils;
 import com.jusenr.chatlibrary.controller.BaseActivity;
 import com.jusenr.chatlibrary.utils.ToastUtils;
@@ -81,6 +82,7 @@ public class MainActivity extends BaseActivity implements
     @BindView(R.id.main_show)
     LinearLayout mMainShow;
 
+    private boolean tag = true;
     private List<Fragment> mFragment = new ArrayList<>();
 
     @Override
@@ -219,9 +221,12 @@ public class MainActivity extends BaseActivity implements
                 mMineRed.setVisibility(View.GONE);
                 break;
             case R.id.seal_more:
+                tag = true;
                 apply();
                 break;
             case R.id.ac_iv_search:
+                tag = false;
+                apply();
                 break;
         }
     }
@@ -262,6 +267,10 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void startScan() {
-        startActivity(new Intent(this, QRActivity.class));
+        if (tag) {
+            startActivity(new Intent(this, QRActivity.class));
+        } else {
+            startActivity(new Intent(this, ScanQrCodeActivity.class));
+        }
     }
 }

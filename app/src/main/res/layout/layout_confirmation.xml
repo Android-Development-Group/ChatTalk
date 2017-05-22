@@ -54,7 +54,7 @@
             android:textSize="@dimen/text_size_12sp"
             android:visibility="gone"/>
 
-        <com.putao.library.widgets.fresco.FrescoImageView
+        <com.jusenr.chatlibrary.view.fresco.FrescoImageView
             android:id="@+id/fiv_icon"
             style="@style/image_circle"
             android:layout_width="80dp"
