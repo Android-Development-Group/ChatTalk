@@ -33,7 +33,7 @@ import com.jusenr.chat.scanner.utils.ScreenUtils;
 public final class QrCodeFinderView extends RelativeLayout {
 
     private static final int[] SCANNER_ALPHA = {0, 64, 128, 192, 255, 192, 128, 64};
-    private static final long ANIMATION_DELAY = 100L;
+    private static final long ANIMATION_DELAY = 100L;//动画延迟
     private static final int OPAQUE = 0xFF;
 
     private Context mContext;
@@ -100,20 +100,11 @@ public final class QrCodeFinderView extends RelativeLayout {
         if (frame == null) {
             return;
         }
-        int width = canvas.getWidth();
-        int height = canvas.getHeight();
-
-        // 绘制焦点框外边的暗色背景
-        mPaint.setColor(mMaskColor);
-        canvas.drawRect(0, 0, width, frame.top, mPaint);
-        canvas.drawRect(0, frame.top, frame.left, frame.bottom + 1, mPaint);
-        canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1, mPaint);
-        canvas.drawRect(0, frame.bottom + 1, width, height, mPaint);
-
+        drawBGRect(canvas, frame);
         drawFocusRect(canvas, frame);
         drawAngle(canvas, frame);
-        drawText(canvas, frame);
-        drawLaser(canvas, frame);
+//        drawText(canvas, frame);
+//        drawLaser(canvas, frame);
 
         // Request another update at the animation interval, but only repaint the laser line,
         // not the entire viewfinder mask.
@@ -121,13 +112,30 @@ public final class QrCodeFinderView extends RelativeLayout {
     }
 
     /**
-     * 画聚焦框，白色的
+     * 绘制焦点框外边的暗色背景
+     *
+     * @param canvas
+     * @param rect
+     */
+    private void drawBGRect(Canvas canvas, Rect rect) {
+        int width = canvas.getWidth();
+        int height = canvas.getHeight();
+        // 画笔颜色
+        mPaint.setColor(mMaskColor);
+        canvas.drawRect(0, 0, width, rect.top, mPaint);
+        canvas.drawRect(0, rect.top, rect.left, rect.bottom + 1, mPaint);
+        canvas.drawRect(rect.right + 1, rect.top, width, rect.bottom + 1, mPaint);
+        canvas.drawRect(0, rect.bottom + 1, width, height, mPaint);
+    }
+
+    /**
+     * 绘制聚焦框，白色的
      *
      * @param canvas
      * @param rect
      */
     private void drawFocusRect(Canvas canvas, Rect rect) {
-        // 绘制焦点框（黑色）
+        // 画笔颜色
         mPaint.setColor(mFrameColor);
         // 上
         canvas.drawRect(rect.left + mAngleLength, rect.top, rect.right - mAngleLength, rect.top + mFocusThick, mPaint);
@@ -143,12 +151,13 @@ public final class QrCodeFinderView extends RelativeLayout {
     }
 
     /**
-     * 画粉色的四个角
+     * 画带色的四个角
      *
      * @param canvas
      * @param rect
      */
     private void drawAngle(Canvas canvas, Rect rect) {
+        // 画笔颜色
         mPaint.setColor(mLaserColor);
         mPaint.setAlpha(OPAQUE);
         mPaint.setStyle(Paint.Style.FILL);
@@ -171,8 +180,15 @@ public final class QrCodeFinderView extends RelativeLayout {
         canvas.drawRect(right - mAngleThick, bottom - mAngleLength, right, bottom, mPaint);
     }
 
+    /**
+     * 绘制文字
+     *
+     * @param canvas
+     * @param rect
+     */
     private void drawText(Canvas canvas, Rect rect) {
         int margin = 40;
+        // 画笔颜色
         mPaint.setColor(mTextColor);
         mPaint.setTextSize(getResources().getDimension(R.dimen.text_size_14sp));
         String text = getResources().getString(R.string.qr_code_auto_scan_notification);
@@ -184,13 +200,18 @@ public final class QrCodeFinderView extends RelativeLayout {
         canvas.drawText(text, left, newY, mPaint);
     }
 
+    /**
+     * 绘制焦点框内固定的一条扫描线
+     *
+     * @param canvas
+     * @param rect
+     */
     private void drawLaser(Canvas canvas, Rect rect) {
-        // 绘制焦点框内固定的一条扫描线（红色）
+        // 画笔颜色
         mPaint.setColor(mLaserColor);
         mPaint.setAlpha(SCANNER_ALPHA[mScannerAlpha]);
         mScannerAlpha = (mScannerAlpha + 1) % SCANNER_ALPHA.length;
         int middle = rect.height() / 2 + rect.top;
         canvas.drawRect(rect.left + 2, middle - 1, rect.right - 1, middle + 2, mPaint);
-
     }
 }
