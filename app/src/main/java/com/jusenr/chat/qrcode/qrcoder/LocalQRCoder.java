@@ -107,7 +107,7 @@ public class LocalQRCoder {
                 } else {
                     if (mOnLocalQRCallback != null) {
                         mOnLocalQRCallback.onQRStop();
-                        mOnLocalQRCallback.onQRFailed("请扫描葡萄产品的二维码！");
+                        mOnLocalQRCallback.onQRFailed();
                     }
                 }
             }

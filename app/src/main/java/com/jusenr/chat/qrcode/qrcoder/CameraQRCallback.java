@@ -12,5 +12,5 @@ public interface CameraQRCallback {
 
     void onQRSuccess(String result);
 
-    void onQRFailed(String msg);
+    void onQRFailed();
 }

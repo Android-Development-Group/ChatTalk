@@ -15,10 +15,10 @@ import android.widget.FrameLayout;
 import com.alibaba.fastjson.JSONObject;
 import com.jusenr.chat.R;
 import com.jusenr.chat.base.TitleActivity;
-import com.jusenr.chat.qrcode.camera.CameraQRCallback;
-import com.jusenr.chat.qrcode.camera.CameraQRCoder;
-import com.jusenr.chat.qrcode.camera.LocalQRCallback;
-import com.jusenr.chat.qrcode.camera.LocalQRCoder;
+import com.jusenr.chat.qrcode.qrcoder.CameraQRCallback;
+import com.jusenr.chat.qrcode.qrcoder.CameraQRCoder;
+import com.jusenr.chat.qrcode.qrcoder.LocalQRCallback;
+import com.jusenr.chat.qrcode.qrcoder.LocalQRCoder;
 import com.jusenr.chat.utils.PermissionsUtils;
 import com.jusenr.chat.utils.ScanUrlParseUtils;
 import com.jusenr.chatlibrary.utils.ImageUtils;
@@ -136,7 +136,7 @@ public class QRActivity extends TitleActivity {
 
         @Override
         public void onQRFailed() {
-            ToastUtils.showToastShort(QRActivity.this, "错误");
+            ToastUtils.showToastShort(QRActivity.this, "请扫描葡萄产品的二维码！");
             cameraQRCoder.start();
         }
 
@@ -159,7 +159,7 @@ public class QRActivity extends TitleActivity {
 
         @Override
         public void onQRFailed() {
-            ToastUtils.showToastShort(QRActivity.this, "错误");
+            ToastUtils.showToastShort(QRActivity.this, "请扫描葡萄产品的二维码！");
             cameraQRCoder.start();
         }
 

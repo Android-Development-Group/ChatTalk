@@ -12,5 +12,5 @@ public interface LocalQRCallback {
 
     void onQRSuccess(String result);
 
-    void onQRFailed(String msg);
+    void onQRFailed();
 }
