@@ -1,6 +1,5 @@
 #include <jni.h>
 #include <string>
-
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_jusenr_chat_jninative_NativeContent_stringFromJNI(
@@ -9,3 +8,4 @@ Java_com_jusenr_chat_jninative_NativeContent_stringFromJNI(
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());
 }
+

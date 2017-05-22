@@ -2,19 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.jusenr.chat">
 
-    <!-- ... -->
+    <!--挂载和反挂载文件系统可移动存储-->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <!--访问网络-->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!--访问电话状态-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--允许调用killBackgroundProcesses()方法-->
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+    <!--读取底层系统日志文件-->
     <uses-permission android:name="android.permission.READ_LOGS"/>
+    <!--禁用键盘锁-->
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
 
-    <!-- SDCard相关 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- SDCard读写 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- 查看 Wi-Fi 状态 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
@@ -29,9 +34,11 @@
     <!-- 防止设备休眠 -->
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
-    <!-- 获取联系人信息，demo中演示发送通讯录消息 -->
+    <!-- 获取联系人信息-->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!--获取位置-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--接收到 ACTION_BOOT_COMPLETED广播在系统完成启动-->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <uses-feature
@@ -82,7 +89,10 @@
         </activity>
 
         <!-- ***************************************  ↓  *************************************** -->
-
+        <!-- Bugly -->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:theme="@android:style/Theme.Translucent"/>
 
         <!-- 友盟 -->
         <meta-data
@@ -126,6 +136,7 @@
         <activity android:name=".qrcode.QRActivity"/>
         <activity android:name=".qrcode.QRResultActivity"/>
         <activity android:name=".scanner.ScanQrCodeActivity"/>
+        <activity android:name=".qrcodescan.CaptureActivity"/>
 
     </application>
 

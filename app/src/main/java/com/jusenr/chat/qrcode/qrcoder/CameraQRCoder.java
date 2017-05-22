@@ -41,9 +41,9 @@ import rx.schedulers.Schedulers;
 public class CameraQRCoder {
     private static final String TAG = "QRCoder";
 
-    private static long AUTO_FOCUS_DELAY = 1000;
+    private static long AUTO_FOCUS_DELAY = 1500;//自动对焦延迟
     private static long QR_START_DELAY_DEFAULT = 0;
-    private static long QR_START_DELAY_LONG = 2500;
+    private static long QR_START_DELAY_LONG = 2000;//启动延迟时间
 
     private FragmentActivity mActivity;
     private ViewGroup previewContainer;
@@ -333,6 +333,9 @@ public class CameraQRCoder {
 
         int cropWidth = qrCropView.getWidth();
         int cropHeight = qrCropView.getHeight();
+
+        Log.i(TAG, "initCropRect: cropLeft=" + cropLeft + ",cropTop=" + cropTop);
+        Log.i(TAG, "initCropRect: cropWidth=" + cropWidth + ",cropHeight=" + cropHeight);
 
         /** 获取布局容器的宽高 */
         int containerWidth = previewContainer.getWidth();
