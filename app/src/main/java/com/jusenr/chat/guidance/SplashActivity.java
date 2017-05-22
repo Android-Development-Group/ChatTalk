@@ -9,7 +9,6 @@ import android.view.WindowManager;
 import com.jusenr.chat.MainActivity;
 import com.jusenr.chat.R;
 import com.jusenr.chat.account.AccountHelper;
-import com.tencent.bugly.beta.Beta;
 
 import java.util.concurrent.TimeUnit;
 
@@ -47,7 +46,6 @@ public class SplashActivity extends AppCompatActivity {
                             AccountHelper.login();
                             startActivity(new Intent(SplashActivity.this, MainActivity.class));
                         }
-                        Beta.checkUpgrade(false, false);
                         finish();
                     }
                 });
