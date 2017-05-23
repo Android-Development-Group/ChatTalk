@@ -25,12 +25,6 @@ Java_com_jusenr_chat_jninative_NativeContent_decode
          jint,
          jint);
 
-
-JNIEXPORT jstring JNICALL
-Java_com_jusenr_chat_jninative_NativeContent_stringFromJNI(
-        JNIEnv *,
-        jobject);
-
 #ifdef __cplusplus
 }
 #endif

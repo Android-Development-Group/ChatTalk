@@ -3,7 +3,6 @@ package com.jusenr.chat.qrcodescan;
 import android.app.Activity;
 import android.graphics.Point;
 import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.SurfaceHolder;
@@ -20,7 +19,6 @@ import com.jusenr.chat.R;
 import com.jusenr.chat.qrcodescan.camera.CameraManager;
 import com.jusenr.chat.qrcodescan.decode.CaptureActivityHandler;
 import com.jusenr.chat.qrcodescan.decode.InactivityTimer;
-
 
 import java.io.IOException;
 
@@ -174,7 +172,7 @@ public class CaptureActivity extends Activity implements Callback {
         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
 
         // 连续扫描，不发送此消息扫描一次结束后就不能再次扫描
-        // handler.sendEmptyMessage(R.id.restart_preview);
+         handler.sendEmptyMessage(R.id.restart_preview);
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {
@@ -263,9 +261,9 @@ public class CaptureActivity extends Activity implements Callback {
 		}
 	}*/
 
-    private final OnCompletionListener beepListener = new OnCompletionListener() {
+   /* private final OnCompletionListener beepListener = new OnCompletionListener() {
         public void onCompletion(MediaPlayer mediaPlayer) {
             mediaPlayer.seekTo(0);
         }
-    };
+    };*/
 }

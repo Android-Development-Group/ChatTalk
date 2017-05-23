@@ -21,6 +21,7 @@ import com.jusenr.chat.home.DiscoverFragment;
 import com.jusenr.chat.home.MineFragment;
 import com.jusenr.chat.jninative.NativeContent;
 import com.jusenr.chat.qrcode.QRActivity;
+import com.jusenr.chat.qrcode.ScanActivity;
 import com.jusenr.chat.scanner.ScanQrCodeActivity;
 import com.jusenr.chat.utils.PermissionsUtils;
 import com.jusenr.chatlibrary.controller.BaseActivity;
@@ -49,6 +50,8 @@ public class MainActivity extends BaseActivity implements
     ViewPager mMainViewpager;
     @BindView(R.id.tab_img_chats)
     ImageView mTabImgChats;
+    @BindView(R.id.tv_chat)
+    TextView mTvChat;
     @BindView(R.id.tab_text_chats)
     TextView mTabTextChats;
     @BindView(R.id.ll)
@@ -92,9 +95,10 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
-
+        String str = "123456";
         NativeContent nativeContent = new NativeContent();
         String s = nativeContent.stringFromJNI();
+//        String s0 = nativeContent.decode(str.getBytes(), 100, 100, true, 80, 150, 100, 100);
 
         changeTextViewColor();
         changeSelectedTabState(0);
@@ -188,9 +192,12 @@ public class MainActivity extends BaseActivity implements
     long firstClick = 0;
     long secondClick = 0;
 
-    @OnClick({R.id.seal_chat, R.id.seal_contact_list, R.id.seal_find, R.id.seal_me, R.id.seal_more, R.id.ac_iv_search})
+    @OnClick({R.id.tv_chat, R.id.seal_chat, R.id.seal_contact_list, R.id.seal_find, R.id.seal_me, R.id.seal_more, R.id.ac_iv_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tv_chat:
+                startActivity(ScanActivity.class);
+                break;
             case R.id.seal_chat:
                 if (mMainViewpager.getCurrentItem() == 0) {
                     if (firstClick == 0) {
@@ -268,9 +275,9 @@ public class MainActivity extends BaseActivity implements
 
     private void startScan() {
         if (tag) {
-            startActivity(new Intent(this, QRActivity.class));
+            startActivity(QRActivity.class);
         } else {
-            startActivity(new Intent(this, ScanQrCodeActivity.class));
+            startActivity(ScanQrCodeActivity.class);
         }
     }
 }

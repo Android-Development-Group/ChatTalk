@@ -14,13 +14,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
-                cppFlags ""
+                cppFlags "-frtti -fexceptions"
             }
         }
         //设置NDK的模块名称及平台
         ndk {
             moduleName "native-lib"
-            abiFilters "armeabi"
+            abiFilters "armeabi", "armeabi-v7a", "x86"
         }
     }
     //为了解决部分第三方库重复打包了META-INF的问题
@@ -42,7 +42,8 @@ android {
     sourceSets {
         main {
             //设置本地代码，[]内容去掉则禁止AS的NDK自动编译。
-            jni.srcDirs = ['src/main/cpp']
+            jni.srcDirs = []
+            jniLibs.srcDirs = ['libs']
             java.srcDirs = ['src/main/java']
             assets.srcDirs = ['src/main/assets']
         }

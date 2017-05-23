@@ -52,6 +52,7 @@ final class DecodeHandler extends Handler {
         width = height;
         height = tmp;
 
+        //zbar.so库不可用
         ZbarManager nativeContent = new ZbarManager();
         String result = nativeContent.decode(rotatedData, width, height, true, activity.getX(), activity.getY(), activity.getCropWidth(),
                 activity.getCropHeight());

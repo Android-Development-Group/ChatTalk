@@ -1,14 +1,17 @@
 package com.jusenr.chat.scanner;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -68,6 +71,7 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
     private TextView mTvFlashLightText;
     private Executor mQrCodeExecutor;
     private Handler mHandler;
+    private static Context mContext;
 
     @Override
     protected void setContentView() {
@@ -82,23 +86,8 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
         initData();
     }
 
-    /*private void checkPermission() {
-        boolean hasHardware = checkCameraHardWare(this);
-        if (hasHardware) {
-            if (!hasCameraPermission()) {
-                findViewById(R.id.qr_code_view_background).setVisibility(View.VISIBLE);
-                mQrCodeFinderView.setVisibility(View.GONE);
-                mPermissionOk = false;
-            } else {
-            mPermissionOk = true;
-            }
-        } else {
-            mPermissionOk = false;
-            finish();
-        }
-    }*/
-
     private void initView() {
+        mContext = this;
         mNavigation_bar.setMainTitleColor(Color.WHITE);
         mNavigation_bar.setRightTitleColor(Color.WHITE);
         mIvFlashLight = (ImageView) findViewById(R.id.qr_code_iv_flash_light);
@@ -117,19 +106,10 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
         mHandler = new WeakHandler(this);
     }
 
-    /*private boolean hasCameraPermission() {
-        PackageManager pm = getPackageManager();
-        return PackageManager.PERMISSION_GRANTED == pm.checkPermission("android.permission.CAMERA", getPackageName());
-    }*/
 
     @Override
     protected void onResume() {
         super.onResume();
-//        checkPermission();
-//        if (!mPermissionOk) {
-//            mDecodeManager.showPermissionDeniedDialog(this);
-//            return;
-//        }
         SurfaceHolder surfaceHolder = mSurfaceView.getHolder();
         turnFlashLightOff();
         if (mHasSurface) {
@@ -139,13 +119,13 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
             surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         }
 
-//        mPlayBeep = true;
-//        AudioManager audioService = (AudioManager) getSystemService(AUDIO_SERVICE);
-//        if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
-//            mPlayBeep = false;
-//        }
-//        initBeepSound();
-//        mVibrate = true;
+        mPlayBeep = true;
+        AudioManager audioService = (AudioManager) getSystemService(AUDIO_SERVICE);
+        if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
+            mPlayBeep = false;
+        }
+        initBeepSound();
+        mVibrate = true;
     }
 
     @Override
@@ -173,14 +153,10 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
      */
     public void handleDecode(Result result) {
         mInactivityTimer.onActivity();
-//        playBeepSoundAndVibrate();
+        playBeepSoundAndVibrate();
         if (null == result) {
-            mDecodeManager.showCouldNotReadQrCodeFromScanner(this, new DecodeManager.OnRefreshCameraListener() {
-                @Override
-                public void refresh() {
-                    restartPreview();
-                }
-            });
+            Toast.makeText(this, "错误", Toast.LENGTH_SHORT).show();
+            restartPreview();
         } else {
             String resultString = result.getText();
             handleResult(resultString);
@@ -190,6 +166,7 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
     private void initCamera(SurfaceHolder surfaceHolder) {
         try {
             CameraManager.get().openDriver(surfaceHolder);
+
         } catch (IOException e) {
             // 基本不会出现相机不存在的情况
             Toast.makeText(this, getString(R.string.qr_code_camera_not_found), Toast.LENGTH_SHORT).show();
@@ -200,7 +177,7 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
             mDecodeManager.showPermissionDeniedDialog(this);
             return;
         }
-//        mQrCodeFinderView.setVisibility(View.VISIBLE);
+        ;
         mSurfaceView.setVisibility(View.VISIBLE);
         mLlFlashLight.setVisibility(View.VISIBLE);
         findViewById(R.id.qr_code_view_background).setVisibility(View.GONE);
@@ -220,12 +197,6 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
 
     }
 
-    /* 检测相机是否存在 */
-  /*  private boolean checkCameraHardWare(Context context) {
-        PackageManager packageManager = context.getPackageManager();
-        return packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA);
-    }*/
-
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         if (!mHasSurface) {
@@ -243,7 +214,7 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
         return mCaptureActivityHandler;
     }
 
-  /*  private void initBeepSound() {
+    private void initBeepSound() {
         if (mPlayBeep && mMediaPlayer == null) {
             // The volume on STREAM_SYSTEM is not adjustable, and users found it too loud,
             // so we now play on the music stream.
@@ -262,9 +233,9 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
                 mMediaPlayer = null;
             }
         }
-    }*/
+    }
 
-  /*  private void playBeepSoundAndVibrate() {
+    private void playBeepSoundAndVibrate() {
         if (mPlayBeep && mMediaPlayer != null) {
             mMediaPlayer.start();
         }
@@ -272,16 +243,17 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
             Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             vibrator.vibrate(VIBRATE_DURATION);
         }
-    }*/
+    }
 
     /**
      * When the beep has finished playing, rewind to queue up another one.
      */
-  /*  private final MediaPlayer.OnCompletionListener mBeepListener = new MediaPlayer.OnCompletionListener() {
+    private final MediaPlayer.OnCompletionListener mBeepListener = new MediaPlayer.OnCompletionListener() {
         public void onCompletion(MediaPlayer mediaPlayer) {
             mediaPlayer.seekTo(0);
         }
-    };*/
+    };
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -299,11 +271,6 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
     public void onRightAction() {
         super.onRightAction();
         openSystemAlbum();
-//        if (!hasCameraPermission()) {
-//            mDecodeManager.showPermissionDeniedDialog(this);
-//        } else {
-//            openSystemAlbum();
-//        }
     }
 
     private void openSystemAlbum() {
@@ -332,24 +299,18 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
 
     private void handleResult(String resultString) {
         if (TextUtils.isEmpty(resultString)) {
-            mDecodeManager.showCouldNotReadQrCodeFromScanner(this, new DecodeManager.OnRefreshCameraListener() {
-                @Override
-                public void refresh() {
-                    restartPreview();
-                }
-            });
+            Toast.makeText(this, "错误", Toast.LENGTH_SHORT).show();
+            restartPreview();
         } else {
             scanResult(resultString);
-//            mDecodeManager.showResultDialog(this, resultString, new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    dialog.dismiss();
-//                    restartPreview();
-//                }
-//            });
         }
     }
 
+    /**
+     * 获取结果
+     *
+     * @param result
+     */
     private void scanResult(String result) {
         Intent intent = new Intent(this, QRResultActivity.class);
         Bundle bundle = new Bundle();
@@ -406,32 +367,25 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
 
         @Override
         public void handleMessage(Message msg) {
-            ScanQrCodeActivity scanQrCodeActivity = mWeakQrCodeActivity.get();
             switch (msg.what) {
                 case MSG_DECODE_SUCCEED:
                     Result result = (Result) msg.obj;
                     if (null == result) {
-                        mDecodeManager.showCouldNotReadQrCodeFromPicture(scanQrCodeActivity);
+                        Toast.makeText(mContext, "错误", Toast.LENGTH_SHORT).show();
                     } else {
                         String resultString = result.getText();
                         handleResult(resultString);
                     }
                     break;
                 case MSG_DECODE_FAIL:
-                    mDecodeManager.showCouldNotReadQrCodeFromPicture(scanQrCodeActivity);
+                    Toast.makeText(mContext, "错误", Toast.LENGTH_SHORT).show();
                     break;
             }
             super.handleMessage(msg);
         }
 
         private void handleResult(String resultString) {
-            ScanQrCodeActivity imagePickerActivity = mWeakQrCodeActivity.get();
-            mDecodeManager.showResultDialog(imagePickerActivity, resultString, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+            Toast.makeText(mContext, resultString, Toast.LENGTH_SHORT).show();
         }
 
     }
