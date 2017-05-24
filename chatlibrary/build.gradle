@@ -49,7 +49,7 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.7'
     compile 'com.google.code.gson:gson:2.8.0'
     //Bugly
-//    compile 'com.tencent.bugly:crashreport:latest.release'
+    compile 'com.tencent.bugly:crashreport:latest.release'
     compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
 //    compile 'com.tencent.bugly:nativecrashreport:latest.release'
     //umeng
