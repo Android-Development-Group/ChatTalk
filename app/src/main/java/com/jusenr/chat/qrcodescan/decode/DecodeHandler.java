@@ -7,8 +7,8 @@ import android.os.Looper;
 import android.os.Message;
 
 import com.jusenr.chat.R;
+import com.jusenr.chat.jninative.NativeContent;
 import com.jusenr.chat.qrcodescan.CaptureActivity;
-import com.jusenr.chat.qrcodescan.ZbarManager;
 import com.jusenr.chat.qrcodescan.bitmap.PlanarYUVLuminanceSource;
 
 import java.io.File;
@@ -52,8 +52,8 @@ final class DecodeHandler extends Handler {
         width = height;
         height = tmp;
 
-        //zbar.so库不可用
-        ZbarManager nativeContent = new ZbarManager();
+        //zbar.so库
+        NativeContent nativeContent = new NativeContent();
         String result = nativeContent.decode(rotatedData, width, height, true, activity.getX(), activity.getY(), activity.getCropWidth(),
                 activity.getCropHeight());
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:background="@color/color_EBEBEB"
+                android:layout_height="match_parent">
+
+    <!--标题栏-->
+    <com.jusenr.chatlibrary.view.NavigationBar
+        style="@style/style_navigation_bar"
+        android:background="@color/transparent"
+        app:nav_left_icon="@drawable/back_selector_white"
+        app:nav_main_title="测试"
+        app:nav_right_title_color="@color/color_EBEBEB"/>
+
+    <com.jusenr.chat.widgets.ScanBoxView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:frame_color="@color/blue"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

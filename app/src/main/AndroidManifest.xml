@@ -135,7 +135,8 @@
         <activity android:name=".qrcode.QRResultActivity"/>
         <activity android:name=".scanner.ScanQrCodeActivity"/>
         <activity android:name=".qrcodescan.CaptureActivity"/>
-        <activity android:name=".qrcode.ScanActivity"/>
+        <activity android:name=".ScanActivity"/>
+        <activity android:name=".TestActivity"/>
 
     </application>
 

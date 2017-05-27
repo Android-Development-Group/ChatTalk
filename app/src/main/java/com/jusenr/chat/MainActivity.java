@@ -19,9 +19,7 @@ import com.jusenr.chat.home.ContactsFragment;
 import com.jusenr.chat.home.ConversationFragment;
 import com.jusenr.chat.home.DiscoverFragment;
 import com.jusenr.chat.home.MineFragment;
-import com.jusenr.chat.jninative.NativeContent;
-import com.jusenr.chat.qrcode.QRActivity;
-import com.jusenr.chat.qrcode.ScanActivity;
+import com.jusenr.chat.qrcodescan.CaptureActivity;
 import com.jusenr.chat.scanner.ScanQrCodeActivity;
 import com.jusenr.chat.utils.PermissionsUtils;
 import com.jusenr.chatlibrary.controller.BaseActivity;
@@ -96,8 +94,8 @@ public class MainActivity extends BaseActivity implements
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         String str = "123456";
-        NativeContent nativeContent = new NativeContent();
-        String s = nativeContent.stringFromJNI();
+//        NativeContent nativeContent = new NativeContent();
+//        String s = nativeContent.stringFromJNI();
 //        String s0 = nativeContent.decode(str.getBytes(), 100, 100, true, 80, 150, 100, 100);
 
         changeTextViewColor();
@@ -196,7 +194,7 @@ public class MainActivity extends BaseActivity implements
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_chat:
-                startActivity(ScanActivity.class);
+                startActivity(TestActivity.class);
                 break;
             case R.id.seal_chat:
                 if (mMainViewpager.getCurrentItem() == 0) {
@@ -275,7 +273,7 @@ public class MainActivity extends BaseActivity implements
 
     private void startScan() {
         if (tag) {
-            startActivity(QRActivity.class);
+            startActivity(CaptureActivity.class);
         } else {
             startActivity(ScanQrCodeActivity.class);
         }

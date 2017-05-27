@@ -1,11 +1,10 @@
-package com.jusenr.chat.qrcode;
+package com.jusenr.chat;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.jusenr.chat.R;
 import com.jusenr.chat.base.TitleActivity;
 import com.jusenr.chat.qrcodescan.CaptureActivity;
 

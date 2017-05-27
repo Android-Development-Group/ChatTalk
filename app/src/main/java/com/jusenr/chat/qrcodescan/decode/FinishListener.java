@@ -10,8 +10,7 @@ import android.content.DialogInterface;
  * <p>
  * 版本: V_1.0.0
  */
-public final class FinishListener
-        implements DialogInterface.OnClickListener, DialogInterface.OnCancelListener, Runnable {
+public final class FinishListener implements DialogInterface.OnClickListener, DialogInterface.OnCancelListener, Runnable {
 
     private final Activity activityToFinish;
 

@@ -15,18 +15,18 @@
 
 
 LOCAL_PATH := $(call my-dir)
-#APP_PATH:= $(NDK)/$(call my-dir) 
+#APP_PATH:= $(NDK)/$(call my-dir)
 
-include $(CLEAR_VARS) 
+include $(CLEAR_VARS)
 
-LOCAL_MODULE := libiconv 
+LOCAL_MODULE := libiconv
 
 LIBICONV := libiconv
 
 LOCAL_CFLAGS := -I$(LOCAL_PATH)/$(LIBICONV)
 LOCAL_SRC_FILES := $(LIBICONV)/iconv.c
 
-include $(BUILD_STATIC_LIBRARY) 
+include $(BUILD_STATIC_LIBRARY)
 
 #LOCAL_PATH := $(call my-dir)
 
@@ -62,5 +62,4 @@ LOCAL_LDLIBS := -llog
 LOCAL_STATIC_LIBRARIES := libiconv
 
 include $(BUILD_SHARED_LIBRARY)
-include $(LOCAL_PATH)/jni/Android.mk
 
