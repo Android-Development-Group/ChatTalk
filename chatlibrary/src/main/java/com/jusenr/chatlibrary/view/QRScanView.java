@@ -45,6 +45,7 @@ public class QRScanView extends View {
      */
     private boolean isPorterduffMode = true;
 
+    private Context mContext;
     private int mScreenWidth;
     private int mScreenHeight;
     private int mViewWidth;
@@ -52,14 +53,11 @@ public class QRScanView extends View {
     private Bitmap mForegroundBitmap, mBackgroundBitmap;
 
     public QRScanView(Context context) {
-        super(context);
-        init(context);
+        this(context, null);
     }
 
     public QRScanView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        initAttrs(context, attrs);
-        init(context);
+        this(context, attrs, -1);
     }
 
     public QRScanView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -73,7 +71,7 @@ public class QRScanView extends View {
         if (mScreenWidth == 0) {
             DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
             mScreenWidth = displayMetrics.widthPixels;
-            mScreenHeight = displayMetrics.heightPixels + statusBarHeight;
+            mScreenHeight = displayMetrics.heightPixels - statusBarHeight;
         }
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.QRScanView);
@@ -85,6 +83,7 @@ public class QRScanView extends View {
     }
 
     private void init(Context context) {
+        mContext = context;
         mBgPaint = new Paint();
         mBgPaint.setAntiAlias(true);
         mBgPaint.setColor(mBackgoundColor);
@@ -135,9 +134,9 @@ public class QRScanView extends View {
             mViewWidth = mScreenWidth - mScreenWidth * 2 / 5;
         }
         int left = mScreenWidth / 2 - mViewWidth / 2;
-        int top = mScreenHeight / 2 - mViewWidth / 2 - 100;
+        int top = mScreenHeight / 2 - mViewWidth / 2;
         int right = mScreenWidth / 2 + mViewWidth / 2;
-        int bottom = mScreenHeight / 2 + mViewWidth / 2 - 100;
+        int bottom = mScreenHeight / 2 + mViewWidth / 2;
 
         canvas.drawRoundRect(new RectF(left, top, right, bottom), mRadius, mRadius, mViewPaint);
         return bitmap;

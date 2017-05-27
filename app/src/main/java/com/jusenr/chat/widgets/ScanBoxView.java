@@ -1,6 +1,7 @@
 package com.jusenr.chat.widgets;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,12 +23,17 @@ import com.jusenr.chat.R;
 
 public class ScanBoxView extends RelativeLayout {
 
+    private static final int[] SCANNER_ALPHA = {0, 64, 128, 192, 255, 192, 128, 64};
     private static final long ANIMATION_DELAY = 100L;//动画延迟
     private static final int OPAQUE = 0xFF;
 
+    private Context mContext;
     private Paint mPaint;
+    private int mScannerAlpha;
+    private int mMaskColor;
     private int mFrameColor;
     private int mLaserColor;
+    private int mTextColor;
     private Rect mFrameRect;
     private int mFocusThick;
     private int mAngleThick;
@@ -46,12 +52,19 @@ public class ScanBoxView extends RelativeLayout {
         mPaint = new Paint();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ScanBoxView);
+        mMaskColor = typedArray.getColor(R.styleable.ScanBoxView_mask_color, Color.parseColor("#80000000"));
         mFrameColor = typedArray.getColor(R.styleable.ScanBoxView_frame_color, Color.parseColor("#FFFFFFFF"));
         mLaserColor = typedArray.getColor(R.styleable.ScanBoxView_laser_color, Color.parseColor("#37C221"));
+
+        Resources resources = getResources();
+        mTextColor = resources.getColor(R.color.qr_code_white);
 
         mFocusThick = 1;
         mAngleThick = 8;
         mAngleLength = 40;
+        mScannerAlpha = 0;
+        // 需要调用下面的方法才会执行onDraw方法
+        setWillNotDraw(false);
     }
 
     @Override
@@ -87,8 +100,8 @@ public class ScanBoxView extends RelativeLayout {
         mFrameRect = new Rect();
         mFrameRect.left = 0;
         mFrameRect.top = 0;
-        mFrameRect.right = width;
-        mFrameRect.bottom = height;
+        mFrameRect.right = mFrameRect.left + width;
+        mFrameRect.bottom = mFrameRect.top + height;
     }
 
     @Override
@@ -100,16 +113,12 @@ public class ScanBoxView extends RelativeLayout {
         if (frame == null) {
             return;
         }
-        drawFocusRect(canvas, frame);
-        drawAngle(canvas, frame);
-
-        // Request another update at the animation interval, but only repaint the laser line,
-        // not the entire viewfinder mask.
-//        postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top, frame.right, frame.bottom);
+        drawFocusRect(canvas, frame);//绘制白色的聚焦边框
+        drawAngle(canvas, frame);//绘制带色的四个角
     }
 
     /**
-     * 绘制聚焦框，白色的
+     * 绘制白色的聚焦边框
      *
      * @param canvas
      * @param rect
@@ -131,7 +140,7 @@ public class ScanBoxView extends RelativeLayout {
     }
 
     /**
-     * 画带色的四个角
+     * 绘制带色的四个角
      *
      * @param canvas
      * @param rect

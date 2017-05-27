@@ -38,7 +38,7 @@
         android:background="@drawable/scan_mask"
         android:visibility="gone"/>
 
-    <RelativeLayout
+    <com.jusenr.chat.widgets.ScanBoxView
         android:id="@+id/capture_crop_layout"
         android:layout_width="220dp"
         android:layout_height="220dp"
@@ -53,7 +53,7 @@
             android:background="@drawable/scan_line"
             android:contentDescription="@string/app_name"/>
 
-    </RelativeLayout>
+    </com.jusenr.chat.widgets.ScanBoxView>
 
     <!--提示文字-->
     <LinearLayout

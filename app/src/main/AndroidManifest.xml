@@ -137,7 +137,8 @@
         <activity android:name=".qrcodescan.CaptureActivity"/>
         <activity android:name=".ScanActivity"/>
         <activity android:name=".TestActivity"/>
-
+        <activity android:name=".TotalActivity">
+        </activity>
     </application>
 
 </manifest>
