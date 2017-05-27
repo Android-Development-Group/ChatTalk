@@ -16,6 +16,8 @@ import android.view.View;
 
 import com.jusenr.chatlibrary.R;
 
+import java.lang.reflect.Field;
+
 /**
  * Created by Penglingxiao on 2017/4/5.
  */
@@ -67,11 +69,11 @@ public class QRScanView extends View {
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
-
+        int statusBarHeight = getStatusBarHeight(context);
         if (mScreenWidth == 0) {
             DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
             mScreenWidth = displayMetrics.widthPixels;
-            mScreenHeight = displayMetrics.heightPixels;
+            mScreenHeight = displayMetrics.heightPixels + statusBarHeight;
         }
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.QRScanView);
@@ -151,5 +153,18 @@ public class QRScanView extends View {
         Canvas canvas = new Canvas(bitmap);
         canvas.drawRect(0, 0, mScreenWidth, mScreenHeight, mBgPaint);
         return bitmap;
+    }
+
+    private int getStatusBarHeight(Context context) {
+        try {
+            Class<?> c = Class.forName("com.android.internal.R$dimen");
+            Object obj = c.newInstance();
+            Field field = c.getField("status_bar_height");
+            int x = Integer.parseInt(field.get(obj).toString());
+            return context.getResources().getDimensionPixelSize(x);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

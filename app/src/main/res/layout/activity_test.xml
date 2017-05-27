@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:background="@color/color_EBEBEB"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/color_EBEBEB">
 
     <!--标题栏-->
     <com.jusenr.chatlibrary.view.NavigationBar
@@ -13,9 +13,36 @@
         app:nav_main_title="测试"
         app:nav_right_title_color="@color/color_EBEBEB"/>
 
-    <com.jusenr.chat.widgets.ScanBoxView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:frame_color="@color/blue"
-        android:layout_centerInParent="true"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navigation_bar"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="扫码"/>
+
+        <Button
+            android:id="@+id/btn_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="扫码"/>
+
+        <Button
+            android:id="@+id/btn_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="扫码"/>
+
+        <Button
+            android:id="@+id/btn_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="扫码"/>
+
+    </LinearLayout>
+
 </RelativeLayout>

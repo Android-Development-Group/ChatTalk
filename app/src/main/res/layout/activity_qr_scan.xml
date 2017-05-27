@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:auto="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/capture_containter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -9,82 +10,82 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <com.jusenr.chatlibrary.view.QRScanView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        auto:inHeight="220dp"
+        auto:inRadius="5dp"
+        auto:inWidth="220dp"
+        auto:isPorterDuffMode="true"
+        auto:qrBackgroundColor="@color/black"/>
+
+    <!--标题栏-->
+    <com.jusenr.chatlibrary.view.NavigationBar
+        style="@style/style_navigation_bar"
+        android:background="@color/transparent"
+        auto:nav_left_icon="@drawable/back_selector_white"
+        auto:nav_main_title="扫一扫"
+        auto:nav_main_title_color="@color/white"
+        auto:nav_right_title="相册"
+        auto:nav_right_title_color="@color/white"/>
+
     <ImageView
         android:id="@+id/top_mask"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/capture_crop_layout"
         android:layout_alignParentTop="true"
         android:background="@drawable/scan_mask"
-        android:contentDescription="@string/app_name"
         android:visibility="gone"/>
 
-    <com.jusenr.chat.widgets.ScanBoxView
+    <RelativeLayout
         android:id="@+id/capture_crop_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/app_name">
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_centerInParent="true">
 
         <ImageView
-            android:layout_centerInParent="true"
             android:id="@+id/capture_scan_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
             android:background="@drawable/scan_line"
             android:contentDescription="@string/app_name"/>
 
-        <LinearLayout
+    </RelativeLayout>
+
+    <!--提示文字-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@id/capture_crop_layout"
             android:gravity="center"
-            android:orientation="vertical">
+            android:text="@string/scan_tips"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
 
-            <TextView
-                android:id="@+id/tv_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/capture_crop_layout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
-                android:text="@string/scan_tips"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/tv_light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_desc"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="闪光灯"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
 
-
-            <TextView
-                android:id="@+id/tv_light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_desc"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
-                android:text="闪光灯"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"/>
-
-        </LinearLayout>
-
-    </com.jusenr.chat.widgets.ScanBoxView>
-
-    <!--  <RelativeLayout
-          android:id="@+id/capture_crop_layout"
-          android:layout_width="200dp"
-          android:layout_height="200dp"
-          android:layout_below="@id/top_mask"
-          android:layout_centerHorizontal="true"
-          android:background="@drawable/capture"
-          android:contentDescription="@string/app_name">
-
-          <ImageView
-              android:id="@+id/capture_scan_line"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_alignParentTop="true"
-              android:layout_margin="5dp"
-              android:background="@drawable/scan_line"
-              android:contentDescription="@string/app_name"/>
-      </RelativeLayout>-->
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/bottom_mask"
@@ -93,7 +94,6 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@id/capture_crop_layout"
         android:background="@drawable/scan_mask"
-        android:contentDescription="@string/app_name"
         android:visibility="gone"/>
 
     <ImageView
@@ -105,7 +105,6 @@
         android:layout_below="@id/top_mask"
         android:layout_toLeftOf="@id/capture_crop_layout"
         android:background="@drawable/scan_mask"
-        android:contentDescription="@string/app_name"
         android:visibility="gone"/>
 
     <ImageView
@@ -117,7 +116,6 @@
         android:layout_below="@id/top_mask"
         android:layout_toRightOf="@id/capture_crop_layout"
         android:background="@drawable/scan_mask"
-        android:contentDescription="@string/app_name"
         android:visibility="gone"/>
 
 </RelativeLayout>

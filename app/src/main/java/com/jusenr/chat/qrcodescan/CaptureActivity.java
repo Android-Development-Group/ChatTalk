@@ -1,8 +1,8 @@
 package com.jusenr.chat.qrcodescan;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -21,11 +21,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jusenr.chat.R;
+import com.jusenr.chat.base.TitleActivity;
 import com.jusenr.chat.qrcode.QRResultActivity;
 import com.jusenr.chat.qrcodescan.camera.CameraManager;
 import com.jusenr.chat.qrcodescan.decode.CaptureActivityHandler;
 import com.jusenr.chat.qrcodescan.decode.InactivityTimer;
-import com.jusenr.chat.widgets.ScanBoxView;
+import com.jusenr.chatlibrary.utils.ToastUtils;
 
 import java.io.IOException;
 
@@ -38,7 +39,7 @@ import java.io.IOException;
  * <p>
  * 描述: 扫描界面(没有.so文件，不可用)
  */
-public class CaptureActivity extends Activity implements Callback {
+public class CaptureActivity extends TitleActivity implements Callback {
 
     private CaptureActivityHandler handler;
     private boolean hasSurface;
@@ -52,7 +53,7 @@ public class CaptureActivity extends Activity implements Callback {
     private int cropWidth = 0;
     private int cropHeight = 0;
     private RelativeLayout mContainer = null;
-    private ScanBoxView mCropLayout = null;
+    private RelativeLayout mCropLayout = null;
     private boolean isNeedCapture = false;
     private TextView mTvLight;
 
@@ -96,14 +97,17 @@ public class CaptureActivity extends Activity implements Callback {
         this.cropHeight = cropHeight;
     }
 
-    /**
-     * Called when the activity is first created.
-     */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+    @Override
+    protected void setContentView() {
         setContentView(R.layout.activity_qr_scan);
+    }
+
+    @Override
+    protected void onViewCreatedFinish(Bundle saveInstanceState) {
+        super.onViewCreatedFinish(saveInstanceState);
+        mNavigation_bar.setMainTitleColor(Color.WHITE);
+        mNavigation_bar.setRightTitleColor(Color.WHITE);
         // 初始化 CameraManager
         CameraManager.init(getApplication());
         hasSurface = false;
@@ -111,7 +115,7 @@ public class CaptureActivity extends Activity implements Callback {
 
         mContainer = (RelativeLayout) findViewById(R.id.capture_containter);
 //        mCropLayout = (RelativeLayout) findViewById(R.id.capture_crop_layout);
-        mCropLayout = (ScanBoxView) findViewById(R.id.capture_crop_layout);
+        mCropLayout = (RelativeLayout) findViewById(R.id.capture_crop_layout);
         mTvLight = (TextView) findViewById(R.id.tv_light);
 
         ImageView mQrLineView = (ImageView) findViewById(R.id.capture_scan_line);
@@ -138,14 +142,20 @@ public class CaptureActivity extends Activity implements Callback {
             flag = false;
             // 开闪光灯
             CameraManager.get().openLight();
-            mTvLight.setText("开闪光灯");
+            mTvLight.setText("关闪光灯");
         } else {
             flag = true;
             // 关闪光灯
             CameraManager.get().offLight();
-            mTvLight.setText("关闪光灯");
+            mTvLight.setText("开闪光灯");
         }
 
+    }
+
+    @Override
+    public void onRightAction() {
+        super.onRightAction();
+        ToastUtils.showToastShort(this, "123");
     }
 
     @SuppressWarnings("deprecation")
