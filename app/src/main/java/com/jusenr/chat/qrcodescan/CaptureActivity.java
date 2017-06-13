@@ -37,7 +37,7 @@ import java.io.IOException;
  * <p>
  * 版本: V_1.0.0
  * <p>
- * 描述: 扫描界面(没有.so文件，不可用)
+ * 描述: 扫描界面
  */
 public class CaptureActivity extends TitleActivity implements Callback {
 
