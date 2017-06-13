@@ -100,7 +100,7 @@ public class CaptureActivity extends TitleActivity implements Callback {
 
     @Override
     protected void setContentView() {
-        setContentView(R.layout.activity_qr_scan);
+        setContentView(R.layout.activity_qr_scan1);
     }
 
     @Override
@@ -114,7 +114,6 @@ public class CaptureActivity extends TitleActivity implements Callback {
         inactivityTimer = new InactivityTimer(this);
 
         mContainer = (RelativeLayout) findViewById(R.id.capture_containter);
-//        mCropLayout = (RelativeLayout) findViewById(R.id.capture_crop_layout);
         mCropLayout = (RelativeLayout) findViewById(R.id.capture_crop_layout);
         mTvLight = (TextView) findViewById(R.id.tv_light);
 

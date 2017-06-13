@@ -92,8 +92,8 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
         mNavigation_bar.setRightTitleColor(Color.WHITE);
         mIvFlashLight = (ImageView) findViewById(R.id.qr_code_iv_flash_light);
         mTvFlashLightText = (TextView) findViewById(R.id.qr_code_tv_flash_light);
-        mQrCodeFinderView = (QrCodeFinderView) findViewById(R.id.qr_code_view_finder);
-        mSurfaceView = (SurfaceView) findViewById(R.id.qr_code_preview_view);
+        mQrCodeFinderView = (QrCodeFinderView) findViewById(R.id.qr_scanview);
+        mSurfaceView = (SurfaceView) findViewById(R.id.capture_preview);
         mLlFlashLight = findViewById(R.id.qr_code_ll_flash_light);
         mHasSurface = false;
         mIvFlashLight.setOnClickListener(this);

@@ -7,4 +7,13 @@
         <attr name="laser_color" format="color"/>
     </declare-styleable>
 
+    <declare-styleable name="QrCodeFinderView">
+        <attr name="innerWidth" format="dimension"/>
+        <attr name="innerHeight" format="dimension"/>
+        <attr name="innerRadius" format="dimension"/>
+        <attr name="maskColor" format="color"/>
+        <attr name="frameColor" format="color"/>
+        <attr name="laserColor" format="color"/>
+    </declare-styleable>
+
 </resources>

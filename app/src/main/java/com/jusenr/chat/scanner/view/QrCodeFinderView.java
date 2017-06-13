@@ -14,29 +14,37 @@
 package com.jusenr.chat.scanner.view;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.jusenr.chat.R;
 import com.jusenr.chat.scanner.utils.ScreenUtils;
+
+import java.lang.reflect.Field;
 
 /**
  * This view is overlaid on top of the camera preview. It adds the viewfinder rectangle and partial transparency outside
  * it, as well as the laser scanner animation and result points.
  */
 public final class QrCodeFinderView extends RelativeLayout {
+    public static final String TAG = QrCodeFinderView.class.getSimpleName();
 
     private static final int[] SCANNER_ALPHA = {0, 64, 128, 192, 255, 192, 128, 64};
     private static final long ANIMATION_DELAY = 100L;//动画延迟
     private static final int OPAQUE = 0xFF;
 
     private Context mContext;
+    private int mScreenWidth;
+    private int mScreenHeight;
+    private int mViewWidth;
+    private int mViewHeight;
+    private int mRadius;//圆角矩形圆角半径
+
     private Paint mPaint;
     private int mScannerAlpha;
     private int mMaskColor;
@@ -58,38 +66,75 @@ public final class QrCodeFinderView extends RelativeLayout {
 
     public QrCodeFinderView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initAttrs(context, attrs);
+    }
+
+    private void initAttrs(Context context, AttributeSet attrs) {
         mContext = context;
         mPaint = new Paint();
-
-        Resources resources = getResources();
-        mMaskColor = resources.getColor(R.color.qr_code_finder_mask);
-        mFrameColor = resources.getColor(R.color.qr_code_finder_frame);
-        mLaserColor = resources.getColor(R.color.qr_code_finder_laser);
-        mTextColor = resources.getColor(R.color.qr_code_white);
 
         mFocusThick = 1;
         mAngleThick = 8;
         mAngleLength = 40;
         mScannerAlpha = 0;
-        init(context);
+
+        int statusBarHeight = getStatusBarHeight(context);
+//        if (mScreenWidth == 0 || mScreenHeight == 0) {
+//            DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+//            mScreenWidth = displayMetrics.widthPixels;
+//            mScreenHeight = displayMetrics.heightPixels;
+////            mScreenHeight = displayMetrics.heightPixels - statusBarHeight;
+//        }
+
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.QrCodeFinderView);
+        mViewWidth = (int) typedArray.getDimension(R.styleable.QrCodeFinderView_innerWidth, 720f);
+        mViewHeight = (int) typedArray.getDimension(R.styleable.QrCodeFinderView_innerHeight, 720f);
+        mRadius = (int) typedArray.getDimension(R.styleable.QrCodeFinderView_innerRadius, 20f);
+        mMaskColor = typedArray.getColor(R.styleable.QrCodeFinderView_maskColor, Color.parseColor("#80000000"));
+        mFrameColor = typedArray.getColor(R.styleable.QrCodeFinderView_frameColor, Color.TRANSPARENT);
+        mLaserColor = typedArray.getColor(R.styleable.QrCodeFinderView_laserColor, Color.parseColor("#37C222"));
+
     }
 
-    private void init(Context context) {
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int myWidth = -1;
+        int myHeight = -1;
+
+        final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        final int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        final int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        if (widthMode != MeasureSpec.UNSPECIFIED) {
+            myWidth = widthSize;
+        }
+
+        if (heightMode != MeasureSpec.UNSPECIFIED) {
+            myHeight = heightSize;
+        }
+
+        if (widthMode == MeasureSpec.EXACTLY) {
+            mScreenWidth = myWidth;
+        }
+
+        if (heightMode == MeasureSpec.EXACTLY) {
+            mScreenHeight = myHeight;
+        }
+
         if (isInEditMode()) {
             return;
         }
         // 需要调用下面的方法才会执行onDraw方法
         setWillNotDraw(false);
-        LayoutInflater inflater = LayoutInflater.from(context);
-        RelativeLayout relativeLayout = (RelativeLayout) inflater.inflate(R.layout.layout_qr_code_scanner, this);
-        FrameLayout frameLayout = (FrameLayout) relativeLayout.findViewById(R.id.qr_code_fl_scanner);
         mFrameRect = new Rect();
-        RelativeLayout.LayoutParams layoutParams = (LayoutParams) frameLayout.getLayoutParams();
-        mFrameRect.left = (ScreenUtils.getScreenWidth(context) - layoutParams.width) / 2;
-        mFrameRect.top = layoutParams.topMargin;
-        mFrameRect.right = mFrameRect.left + layoutParams.width;
-        mFrameRect.bottom = mFrameRect.top + layoutParams.height;
+        mFrameRect.left = (mScreenWidth - mViewWidth) / 2;
+        mFrameRect.top = (mScreenHeight - mViewHeight) / 2;
+        mFrameRect.right = mFrameRect.left + mViewWidth;
+        mFrameRect.bottom = mFrameRect.top + mViewHeight;
     }
+
 
     @Override
     public void onDraw(Canvas canvas) {
@@ -213,5 +258,32 @@ public final class QrCodeFinderView extends RelativeLayout {
         mScannerAlpha = (mScannerAlpha + 1) % SCANNER_ALPHA.length;
         int middle = rect.height() / 2 + rect.top;
         canvas.drawRect(rect.left + 2, middle - 1, rect.right - 1, middle + 2, mPaint);
+    }
+
+    /**
+     * 获取状态栏高度
+     *
+     * @param context
+     * @return
+     */
+    private int getStatusBarHeight(Context context) {
+        try {
+            Class<?> c = Class.forName("com.android.internal.R$dimen");
+            Object obj = c.newInstance();
+            Field field = c.getField("status_bar_height");
+            int x = Integer.parseInt(field.get(obj).toString());
+            return context.getResources().getDimensionPixelSize(x);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getViewWidth() {
+        return mViewWidth;
+    }
+
+    public int getViewHeight() {
+        return mViewHeight;
     }
 }
