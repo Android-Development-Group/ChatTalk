@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--ScanBoxView-->
     <declare-styleable name="ScanBoxView">
         <attr name="mask_color" format="color"/>
         <attr name="frame_color" format="color"/>
         <attr name="laser_color" format="color"/>
     </declare-styleable>
 
+    <!--QrCodeFinderView-->
     <declare-styleable name="QrCodeFinderView">
         <attr name="innerWidth" format="dimension"/>
         <attr name="innerHeight" format="dimension"/>
-        <attr name="innerRadius" format="dimension"/>
+        <attr name="innerAngleThick" format="dimension"/>
+        <attr name="innerAngleLength" format="dimension"/>
         <attr name="maskColor" format="color"/>
         <attr name="frameColor" format="color"/>
         <attr name="laserColor" format="color"/>

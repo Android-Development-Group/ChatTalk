@@ -39,22 +39,21 @@ public final class QrCodeFinderView extends RelativeLayout {
     private static final int OPAQUE = 0xFF;
 
     private Context mContext;
+    private Rect mFrameRect;
+    private Paint mPaint;
+    private int mScannerAlpha = 0;
+    private int mFocusThick = 1;
     private int mScreenWidth;
     private int mScreenHeight;
+
     private int mViewWidth;
     private int mViewHeight;
-    private int mRadius;//圆角矩形圆角半径
-
-    private Paint mPaint;
-    private int mScannerAlpha;
+    private int mAngleThick;
+    private int mAngleLength;
     private int mMaskColor;
     private int mFrameColor;
     private int mLaserColor;
     private int mTextColor;
-    private Rect mFrameRect;
-    private int mFocusThick;
-    private int mAngleThick;
-    private int mAngleLength;
 
     public QrCodeFinderView(Context context) {
         this(context, null);
@@ -72,12 +71,6 @@ public final class QrCodeFinderView extends RelativeLayout {
     private void initAttrs(Context context, AttributeSet attrs) {
         mContext = context;
         mPaint = new Paint();
-
-        mFocusThick = 1;
-        mAngleThick = 8;
-        mAngleLength = 40;
-        mScannerAlpha = 0;
-
         int statusBarHeight = getStatusBarHeight(context);
 //        if (mScreenWidth == 0 || mScreenHeight == 0) {
 //            DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
@@ -89,8 +82,9 @@ public final class QrCodeFinderView extends RelativeLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.QrCodeFinderView);
         mViewWidth = (int) typedArray.getDimension(R.styleable.QrCodeFinderView_innerWidth, 720f);
         mViewHeight = (int) typedArray.getDimension(R.styleable.QrCodeFinderView_innerHeight, 720f);
-        mRadius = (int) typedArray.getDimension(R.styleable.QrCodeFinderView_innerRadius, 20f);
-        mMaskColor = typedArray.getColor(R.styleable.QrCodeFinderView_maskColor, Color.parseColor("#80000000"));
+        mAngleThick = (int) typedArray.getDimension(R.styleable.QrCodeFinderView_innerAngleThick, 12f);
+        mAngleLength = (int) typedArray.getDimension(R.styleable.QrCodeFinderView_innerAngleLength, 60f);
+        mMaskColor = typedArray.getColor(R.styleable.QrCodeFinderView_maskColor, Color.parseColor("#70000000"));
         mFrameColor = typedArray.getColor(R.styleable.QrCodeFinderView_frameColor, Color.TRANSPARENT);
         mLaserColor = typedArray.getColor(R.styleable.QrCodeFinderView_laserColor, Color.parseColor("#37C222"));
 
@@ -174,7 +168,7 @@ public final class QrCodeFinderView extends RelativeLayout {
     }
 
     /**
-     * 绘制聚焦框，白色的
+     * 绘制聚焦框，透明的
      *
      * @param canvas
      * @param rect

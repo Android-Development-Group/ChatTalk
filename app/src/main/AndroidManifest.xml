@@ -54,7 +54,7 @@
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
 
         <!-- 分属app_id -->
         <meta-data
@@ -67,7 +67,7 @@
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/SplashScreen"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -88,9 +88,9 @@
 
         <!-- ***************************************  ↓  *************************************** -->
         <!-- Bugly -->
-        <activity
-            android:name="com.tencent.bugly.beta.ui.BetaActivity"
-            android:theme="@android:style/Theme.Translucent"/>
+        <!--<activity-->
+        <!--android:name="com.tencent.bugly.beta.ui.BetaActivity"-->
+        <!--android:theme="@android:style/Theme.Translucent"/>-->
 
         <!-- 友盟 -->
         <meta-data
@@ -125,7 +125,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <!-- 引导页 -->
         <!-- <activity -->
