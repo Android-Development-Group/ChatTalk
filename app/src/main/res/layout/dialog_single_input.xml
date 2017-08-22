@@ -23,7 +23,7 @@
             android:textColor="@color/text_color_313131"
             android:textSize="18sp"/>
 
-        <com.jusenr.chatlibrary.view.CleanableEditText
+        <com.jusenr.library.view.CleanableEditText
             android:id="@+id/et_nickname"
             style="@style/TalkText.EditText"
             android:layout_width="match_parent"

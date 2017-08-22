@@ -1,15 +1,21 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: rootProject.ext.plugins.application
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion rootProject.ext.androids.compileSdkVersion
+    buildToolsVersion rootProject.ext.androids.buildToolsVersion
+
     defaultConfig {
-        applicationId "com.jusenr.chat"
-        minSdkVersion 19
-        targetSdkVersion 25
-        versionCode 3
-        versionName "1.5"
+        applicationId rootProject.ext.androids.applicationId
+        minSdkVersion rootProject.ext.androids.minSdkVersion
+        targetSdkVersion rootProject.ext.androids.targetSdkVersion
+        versionCode rootProject.ext.androids.versionCode
+        versionName rootProject.ext.androids.versionName
+        manifestPlaceholders rootProject.ext.androids.manifestPlaceholders
+        //语言环境和logcat日志TAG设置
+        buildConfigField "String", "LOG_TAG", "\"${rootProject.ext.APP_LOG_TAG}\""
+        //必须给出默认值，不然其他渠道包域名初始化为空
+        buildConfigField "boolean", "IS_TEST", "false"
+        buildConfigField "int", "HOST_NOW", "1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
@@ -51,6 +57,8 @@ android {
 
     buildTypes {
         release {
+            //显示Log状态
+            buildConfigField "boolean", "LOG_DEBUG", "false"
             minifyEnabled false
             shrinkResources false
             zipAlignEnabled true
@@ -58,6 +66,8 @@ android {
             signingConfig signingConfigs.release
         }
         debug {
+            //显示Log状态
+            buildConfigField "boolean", "LOG_DEBUG", "true"
             minifyEnabled false
             shrinkResources false
             signingConfig signingConfigs.release
@@ -77,28 +87,66 @@ android {
 
     //产品渠道配置
     productFlavors {
-        local_release { versionName = "V" + defaultConfig.versionName }
-//        local_debug { versionName = "D" + defaultConfig.versionName }
-//        channel_360 { versionName = "V" + defaultConfig.versionName }
-//          ... ...
+        innerTest {
+            buildConfigField "boolean", "IS_TEST", "true"
+            buildConfigField "int", "HOST_NOW", "2"
+            versionName = "T" + rootProject.getVersionName()
+        }
+
+        dev {
+            buildConfigField "boolean", "IS_TEST", "true"
+            buildConfigField "int", "HOST_NOW", "3"
+            versionName = "D" + rootProject.getVersionName()
+        }
+
+        online {
+            versionName = "V" + rootProject.getVersionName()
+        }
+
+        xiaomi { versionName = "V" + defaultConfig.versionName }
+        huawei { versionName = "V" + defaultConfig.versionName }
+
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
     }
+
+    //Apk包名自定义
+    applicationVariants.all {
+        variant ->
+            def apkFileName = rootProject.getVersionName()
+            variant.outputs.each {
+                output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = outputFile.name.replace(".apk", "-${apkFileName}.apk")
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+            }
+    }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile project(':chatlibrary')
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.yanzhenjie:permission:1.0.7'
-    compile 'com.google.zxing:core:3.3.0'
     testCompile 'junit:junit:4.12'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile project(':chat_library')
+    compile rootProject.ext.dependencies.permission
+    compile rootProject.ext.dependencies.core
+    compile rootProject.ext.dependencies.ptlog
+
+    annotationProcessor rootProject.ext.dependencies.butterknife_compiler
+
+    //查看App数据库使用(方法：1.放开注释 2.重新编译 3.使用'DebugDB'字段检索日志 4.访问检索到的连接，OK!)
+//    debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
 }
 
 //编译结束后删除unaligned包

@@ -21,11 +21,12 @@ import com.jusenr.chat.qrcode.qrcoder.LocalQRCallback;
 import com.jusenr.chat.qrcode.qrcoder.LocalQRCoder;
 import com.jusenr.chat.utils.PermissionsUtils;
 import com.jusenr.chat.utils.ScanUrlParseUtils;
-import com.jusenr.chatlibrary.utils.ImageUtils;
-import com.jusenr.chatlibrary.utils.Logger;
-import com.jusenr.chatlibrary.utils.NetworkUtils;
-import com.jusenr.chatlibrary.utils.StringUtils;
-import com.jusenr.chatlibrary.utils.ToastUtils;
+import com.jusenr.library.utils.ImageUtils;
+import com.jusenr.library.utils.Logger;
+import com.jusenr.library.utils.NetworkUtils;
+import com.jusenr.library.utils.StringUtils;
+import com.jusenr.library.utils.ToastUtils;
+import com.putao.ptlog.PTLog;
 import com.yanzhenjie.permission.AndPermission;
 
 import java.util.List;
@@ -57,6 +58,7 @@ public class QRActivity extends TitleActivity {
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         super.onViewCreatedFinish(saveInstanceState);
+        PTLog.i(getLocalClassName());
         mContext = this;
         mNavigation_bar.setMainTitleColor(Color.WHITE);
         cameraQRCoder = new CameraQRCoder(this, scanPreview, scanCropView);

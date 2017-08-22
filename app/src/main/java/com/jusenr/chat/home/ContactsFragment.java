@@ -8,7 +8,8 @@ import android.widget.TextView;
 import com.jusenr.chat.R;
 import com.jusenr.chat.TotalActivity;
 import com.jusenr.chat.qrcode.QRActivity;
-import com.jusenr.chatlibrary.controller.BaseFragment;
+import com.jusenr.library.controller.BaseFragment;
+import com.putao.ptlog.PTLog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -37,6 +38,7 @@ public class ContactsFragment extends BaseFragment {
 
     @Override
     public void onViewCreatedFinish(Bundle savedInstanceState) {
+        PTLog.i(getClass().getSimpleName());
         mTvTest.setText("测试bugly崩溃收集");
     }
 

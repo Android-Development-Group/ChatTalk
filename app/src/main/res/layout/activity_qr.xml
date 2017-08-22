@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.jusenr.chatlibrary.view.QRScanView
+    <com.jusenr.library.view.QRScanView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         auto:inHeight="240dp"
@@ -20,7 +20,7 @@
         auto:qrBackgroundColor="@color/black"/>
 
     <!--标题栏-->
-    <com.jusenr.chatlibrary.view.NavigationBar
+    <com.jusenr.library.view.NavigationBar
         style="@style/style_navigation_bar"
         android:background="@color/transparent"
         auto:nav_left_icon="@drawable/back_selector_white"

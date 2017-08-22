@@ -57,7 +57,7 @@
 
             </RelativeLayout>
 
-            <com.jusenr.chatlibrary.view.DragPointView
+            <com.jusenr.library.view.DragPointView
                 android:id="@+id/seal_num"
                 android:layout_width="19dp"
                 android:layout_height="19dp"

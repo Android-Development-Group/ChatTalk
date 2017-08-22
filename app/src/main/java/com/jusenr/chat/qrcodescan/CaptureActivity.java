@@ -26,7 +26,8 @@ import com.jusenr.chat.qrcode.QRResultActivity;
 import com.jusenr.chat.qrcodescan.camera.CameraManager;
 import com.jusenr.chat.qrcodescan.decode.CaptureActivityHandler;
 import com.jusenr.chat.qrcodescan.decode.InactivityTimer;
-import com.jusenr.chatlibrary.utils.ToastUtils;
+import com.jusenr.library.utils.ToastUtils;
+import com.putao.ptlog.PTLog;
 
 import java.io.IOException;
 
@@ -106,6 +107,7 @@ public class CaptureActivity extends TitleActivity implements Callback {
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         super.onViewCreatedFinish(saveInstanceState);
+        PTLog.i(getLocalClassName());
         mNavigation_bar.setMainTitleColor(Color.WHITE);
         mNavigation_bar.setRightTitleColor(Color.WHITE);
         // 初始化 CameraManager

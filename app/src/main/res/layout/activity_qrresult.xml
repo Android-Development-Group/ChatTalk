@@ -7,7 +7,7 @@
                 android:background="@color/color_EBEBEB">
 
     <!--标题栏-->
-    <com.jusenr.chatlibrary.view.NavigationBar
+    <com.jusenr.library.view.NavigationBar
         style="@style/style_navigation_bar"
         auto:nav_left_icon="@drawable/back_selector_white"
         auto:nav_main_title="扫描结果"

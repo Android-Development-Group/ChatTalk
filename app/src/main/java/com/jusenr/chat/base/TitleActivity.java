@@ -3,11 +3,10 @@ package com.jusenr.chat.base;
 import android.os.Bundle;
 
 import com.jusenr.chat.R;
-import com.jusenr.chatlibrary.controller.BaseActivity;
-import com.jusenr.chatlibrary.view.NavigationBar;
+import com.jusenr.library.controller.BaseActivity;
+import com.jusenr.library.view.NavigationBar;
 
 import butterknife.BindView;
-
 
 public abstract class TitleActivity extends BaseActivity implements NavigationBar.ActionsListener {
     @BindView(R.id.navigation_bar)

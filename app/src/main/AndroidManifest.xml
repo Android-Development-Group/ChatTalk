@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.jusenr.chat">
 
     <!-- 挂载和反挂载文件系统可移动存储 -->
@@ -59,7 +60,7 @@
         <!-- 分属app_id -->
         <meta-data
             android:name="app_id"
-            android:value="6666"/>
+            android:value="${APP_ID}"/>
 
         <!-- 闪屏 -->
         <activity
@@ -81,8 +82,8 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
-                    android:host="putao"
-                    android:scheme="ptpad"/>
+                    android:host="jusenr"
+                    android:scheme="chat"/>
             </intent-filter>
         </activity>
 
@@ -95,10 +96,16 @@
         <!-- 友盟 -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="1234567890123456"/>
+            android:value="${UMENG_APPKEY_VALUE}"/>
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}"/>
+
+        <!-- PTLog -->
+        <activity
+            android:name="com.putao.ptlog.viewer.PTLogActivity"
+            android:screenOrientation="portrait"/>
+
 
         <!-- ***************************************  ↑  *************************************** -->
 

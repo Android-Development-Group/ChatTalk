@@ -6,7 +6,7 @@
                 android:background="@color/color_EBEBEB">
 
     <!--标题栏-->
-    <com.jusenr.chatlibrary.view.NavigationBar
+    <com.jusenr.library.view.NavigationBar
         style="@style/style_navigation_bar"
         android:background="@color/transparent"
         app:nav_left_icon="@drawable/back_selector_white"

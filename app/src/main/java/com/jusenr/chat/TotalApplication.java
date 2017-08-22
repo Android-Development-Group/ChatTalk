@@ -1,12 +1,17 @@
 package com.jusenr.chat;
 
 
+import android.content.pm.ApplicationInfo;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.jusenr.chatlibrary.controller.ActivityManager;
-import com.jusenr.chatlibrary.controller.BaseApplication;
-import com.jusenr.chatlibrary.utils.Logger;
-import com.jusenr.chatlibrary.utils.SDCardUtils;
-import com.jusenr.chatlibrary.view.fresco.ImagePipelineFactory;
+import com.jusenr.library.controller.ActivityManager;
+import com.jusenr.library.controller.BaseApplication;
+import com.jusenr.library.utils.AppUtils;
+import com.jusenr.library.utils.Logger;
+import com.jusenr.library.utils.SDCardUtils;
+import com.jusenr.library.view.fresco.ImagePipelineFactory;
+import com.putao.ptlog.PTLog;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
 
@@ -23,6 +28,7 @@ public class TotalApplication extends BaseApplication {
 
     @Override
     public void onCreate() {
+        PTLog.init(getApplicationContext(), PTLog.DEBUG);
         super.onCreate();
         //创建储存文件夹
         File appDir = new File(getSdCardPath());
@@ -30,11 +36,22 @@ public class TotalApplication extends BaseApplication {
             boolean isSuccess = appDir.mkdirs();
             System.out.println("Create-" + getSdCardPath() + ":===================>" + isSuccess);
         }
-
+        //初始化Fresco
         Fresco.initialize(getApplicationContext(),
                 ImagePipelineFactory.imagePipelineConfig(getApplicationContext(),
                         new OkHttpClient()));
+        //初始化UMeng
+        ApplicationInfo info = AppUtils.getApplicationInfo(getApplicationContext());
+        String umeng_appkey = info.metaData.getString("UMENG_APPKEY");
+        String umeng_channel = info.metaData.getString("UMENG_CHANNEL");
+        MobclickAgent.UMAnalyticsConfig config = new MobclickAgent.UMAnalyticsConfig(getApplicationContext(), umeng_appkey, umeng_channel);
+        MobclickAgent.startWithConfigure(config);
+        MobclickAgent.setDebugMode(BuildConfig.DEBUG);
+        MobclickAgent.setCatchUncaughtExceptions(true);
+        MobclickAgent.openActivityDurationTrack(false);
 
+        PTLog.e("umeng_appkey=%s", umeng_appkey);
+        PTLog.e("umeng_channel=%s", umeng_channel);
     }
 
     @Override
@@ -98,7 +115,9 @@ public class TotalApplication extends BaseApplication {
     protected void onCrash(Throwable ex) {
         Logger.e("APP崩溃了,错误信息是" + ex.getMessage());
         ex.printStackTrace();
+        MobclickAgent.reportError(getApplicationContext(), ex);
+        MobclickAgent.onKillProcess(getApplicationContext());
         ActivityManager.getInstance().finishAllActivity();
-        ActivityManager.getInstance().killProcess(this);
+        ActivityManager.getInstance().killProcess(getApplicationContext());
     }
 }

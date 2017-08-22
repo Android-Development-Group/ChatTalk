@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "config.gradle"
 
 buildscript {
     repositories {
@@ -6,9 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
-        classpath "com.neenbedankt.gradle.plugins:android-apt:1.8"
-//        classpath 'com.tencent.bugly:symtabfileuploader:2.0.6'
+        classpath 'com.android.tools.build:gradle:2.3.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -18,9 +17,38 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+
+        maven { url 'http://maven.putao.io/nexus/content/repositories/putao/' }
+        maven { url 'http://maven.putao.io/nexus/content/repositories/PutaoCentral/' }
+    }
+}
+
+subprojects {
+    configurations.all {
+        resolutionStrategy {
+            force 'com.android.support:appcompat-v7:25.3.1'
+        }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+//获取版本号
+def getVersionName() {
+    int num = rootProject.ext.VERSION_NUM
+    if (num > 0) {
+        return String.format("%s.%d", rootProject.ext.androids.versionName, rootProject.ext.VERSION_NUM)
+    } else {
+        return rootProject.ext.androids.versionName
+    }
+}
+
+//git提交次数
+static int gitVersionCode() {
+    def count = "git rev-list HEAD --count".execute().text.trim()
+    return count.isInteger() ? count.toInteger() : 0
 }

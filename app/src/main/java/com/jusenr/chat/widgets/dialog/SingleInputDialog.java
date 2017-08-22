@@ -9,7 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import com.jusenr.chat.R;
-import com.jusenr.chatlibrary.view.CleanableEditText;
+import com.jusenr.library.view.CleanableEditText;
 
 import butterknife.BindView;
 import butterknife.OnClick;

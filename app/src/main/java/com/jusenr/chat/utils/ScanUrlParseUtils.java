@@ -2,7 +2,7 @@ package com.jusenr.chat.utils;
 
 import android.net.Uri;
 
-import com.jusenr.chatlibrary.utils.StringUtils;
+import com.jusenr.library.utils.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;

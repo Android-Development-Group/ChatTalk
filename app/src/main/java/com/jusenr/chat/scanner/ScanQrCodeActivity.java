@@ -33,6 +33,7 @@ import com.jusenr.chat.scanner.decode.DecodeImageThread;
 import com.jusenr.chat.scanner.decode.DecodeManager;
 import com.jusenr.chat.scanner.decode.InactivityTimer;
 import com.jusenr.chat.scanner.view.QrCodeFinderView;
+import com.putao.ptlog.PTLog;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -81,7 +82,7 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         super.onViewCreatedFinish(saveInstanceState);
-
+        PTLog.i(getLocalClassName());
         initView();
         initData();
     }

@@ -22,9 +22,9 @@ import com.jusenr.chat.home.MineFragment;
 import com.jusenr.chat.qrcodescan.CaptureActivity;
 import com.jusenr.chat.scanner.ScanQrCodeActivity;
 import com.jusenr.chat.utils.PermissionsUtils;
-import com.jusenr.chatlibrary.controller.BaseActivity;
-import com.jusenr.chatlibrary.utils.ToastUtils;
-import com.jusenr.chatlibrary.view.DragPointView;
+import com.jusenr.library.controller.BaseActivity;
+import com.jusenr.library.utils.ToastUtils;
+import com.jusenr.library.view.DragPointView;
 import com.yanzhenjie.permission.AndPermission;
 
 import java.util.ArrayList;

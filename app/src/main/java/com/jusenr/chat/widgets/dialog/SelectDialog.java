@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jusenr.chat.R;
-import com.jusenr.chatlibrary.view.fresco.FrescoImageView;
+import com.jusenr.library.view.fresco.FrescoImageView;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.jusenr.chat.R;
 import com.jusenr.chat.base.TitleActivity;
+import com.putao.ptlog.PTLog;
 
 import butterknife.BindView;
 
@@ -21,6 +22,7 @@ public class QRResultActivity extends TitleActivity {
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         super.onViewCreatedFinish(saveInstanceState);
+        PTLog.i(getLocalClassName());
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String result = extras.getString("result");
