@@ -25,6 +25,7 @@ import com.jusenr.chat.utils.PermissionsUtils;
 import com.jusenr.library.controller.BaseActivity;
 import com.jusenr.library.utils.ToastUtils;
 import com.jusenr.library.view.DragPointView;
+import com.putao.ptlog.PTLog;
 import com.yanzhenjie.permission.AndPermission;
 
 import java.util.ArrayList;
@@ -94,6 +95,9 @@ public class MainActivity extends BaseActivity implements
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         MobClient.onEvent(this, getLocalClassName());
+        PTLog.i(TotalApplication.app_device_id);
+        String deviceInfo = MobClient.getDeviceInfo(this);
+        PTLog.i(deviceInfo);
         String str = "123456";
 //        NativeContent nativeContent = new NativeContent();
 //        String s = nativeContent.stringFromJNI();
@@ -102,7 +106,7 @@ public class MainActivity extends BaseActivity implements
         changeTextViewColor();
         changeSelectedTabState(0);
         initMainViewPager();
-
+//24:1F:A0:17:C1:37
     }
 
     private void initMainViewPager() {
