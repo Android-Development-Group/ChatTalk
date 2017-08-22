@@ -29,7 +29,7 @@ public class TestActivity extends TitleActivity {
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         super.onViewCreatedFinish(saveInstanceState);
-
+        MobClient.onEvent(this, getLocalClassName());
     }
 
     @OnClick({R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4})

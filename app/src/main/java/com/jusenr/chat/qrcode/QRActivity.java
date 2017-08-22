@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.alibaba.fastjson.JSONObject;
+import com.jusenr.chat.MobClient;
 import com.jusenr.chat.R;
 import com.jusenr.chat.base.TitleActivity;
 import com.jusenr.chat.qrcode.qrcoder.CameraQRCallback;
@@ -58,6 +59,7 @@ public class QRActivity extends TitleActivity {
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         super.onViewCreatedFinish(saveInstanceState);
+        MobClient.onEvent(this, getLocalClassName());
         PTLog.i(getLocalClassName());
         mContext = this;
         mNavigation_bar.setMainTitleColor(Color.WHITE);

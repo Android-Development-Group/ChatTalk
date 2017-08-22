@@ -3,6 +3,7 @@ package com.jusenr.chat.qrcode;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.jusenr.chat.MobClient;
 import com.jusenr.chat.R;
 import com.jusenr.chat.base.TitleActivity;
 import com.putao.ptlog.PTLog;
@@ -22,6 +23,7 @@ public class QRResultActivity extends TitleActivity {
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         super.onViewCreatedFinish(saveInstanceState);
+        MobClient.onEvent(this, getLocalClassName());
         PTLog.i(getLocalClassName());
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

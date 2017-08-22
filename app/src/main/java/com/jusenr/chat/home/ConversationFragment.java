@@ -2,6 +2,7 @@ package com.jusenr.chat.home;
 
 import android.os.Bundle;
 
+import com.jusenr.chat.MobClient;
 import com.jusenr.chat.R;
 import com.jusenr.library.controller.BaseFragment;
 import com.putao.ptlog.PTLog;
@@ -20,6 +21,7 @@ public class ConversationFragment extends BaseFragment {
 
     @Override
     public void onViewCreatedFinish(Bundle savedInstanceState) {
+        MobClient.onEvent(mActivity, getClass().getSimpleName());
         PTLog.i(getClass().getSimpleName());
     }
 

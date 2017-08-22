@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jusenr.chat.MobClient;
 import com.jusenr.chat.R;
 import com.jusenr.library.controller.BaseFragment;
 import com.putao.ptlog.PTLog;
@@ -30,6 +31,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void onViewCreatedFinish(Bundle savedInstanceState) {
+        MobClient.onEvent(mActivity, getClass().getSimpleName());
         PTLog.i(getClass().getSimpleName());
     }
 

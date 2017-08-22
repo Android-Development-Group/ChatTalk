@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jusenr.chat.MobClient;
 import com.jusenr.chat.R;
 import com.jusenr.chat.base.TitleActivity;
 import com.jusenr.chat.qrcode.QRResultActivity;
@@ -108,6 +109,7 @@ public class CaptureActivity extends TitleActivity implements Callback {
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         super.onViewCreatedFinish(saveInstanceState);
         PTLog.i(getLocalClassName());
+        MobClient.onEvent(this, getLocalClassName());
         mNavigation_bar.setMainTitleColor(Color.WHITE);
         mNavigation_bar.setRightTitleColor(Color.WHITE);
         // 初始化 CameraManager

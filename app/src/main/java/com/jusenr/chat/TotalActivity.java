@@ -15,6 +15,6 @@ public class TotalActivity extends TitleActivity {
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         super.onViewCreatedFinish(saveInstanceState);
-
+        MobClient.onEvent(this, getLocalClassName());
     }
 }

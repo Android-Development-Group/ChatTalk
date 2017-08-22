@@ -57,18 +57,17 @@ public class TotalApplication extends BaseApplication {
     @Override
     protected void initEnvironment() {
         //初始化Service Api
-        BaseApi.init(BaseApi.HOST_TEST);
+        BaseApi.init();
     }
 
     @Override
     public String appDeviceId() {
-        return null;
+        return AppUtils.getRealDeviceId(getApplicationContext());
     }
 
     @Override
     protected boolean isDebug() {
-        //根据需求更改
-        return BaseApi.isInnerEnvironment();
+        return BuildConfig.IS_TEST;
     }
 
     @Override
@@ -83,7 +82,7 @@ public class TotalApplication extends BaseApplication {
 
     @Override
     protected String getLogTag() {
-        return "chatapp_log";
+        return BuildConfig.LOG_TAG;
     }
 
     @Override

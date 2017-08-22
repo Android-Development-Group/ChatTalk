@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
+import com.jusenr.chat.MobClient;
 import com.jusenr.chat.R;
 import com.jusenr.chat.base.TitleActivity;
 import com.jusenr.chat.qrcode.QRResultActivity;
@@ -82,7 +83,9 @@ public class ScanQrCodeActivity extends TitleActivity implements Callback, OnCli
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
         super.onViewCreatedFinish(saveInstanceState);
+        MobClient.onEvent(this, getLocalClassName());
         PTLog.i(getLocalClassName());
+
         initView();
         initData();
     }

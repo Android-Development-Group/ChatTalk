@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jusenr.chat.MobClient;
 import com.jusenr.chat.R;
 import com.jusenr.chat.TotalActivity;
 import com.jusenr.chat.qrcode.QRActivity;
@@ -38,6 +39,7 @@ public class ContactsFragment extends BaseFragment {
 
     @Override
     public void onViewCreatedFinish(Bundle savedInstanceState) {
+        MobClient.onEvent(mActivity, getClass().getSimpleName());
         PTLog.i(getClass().getSimpleName());
         mTvTest.setText("测试bugly崩溃收集");
     }

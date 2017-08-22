@@ -26,7 +26,6 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.AbsListView;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 
 public class DragPointView extends android.support.v7.widget.AppCompatTextView {

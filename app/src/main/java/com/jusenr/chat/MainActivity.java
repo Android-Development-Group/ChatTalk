@@ -93,6 +93,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     protected void onViewCreatedFinish(Bundle saveInstanceState) {
+        MobClient.onEvent(this, getLocalClassName());
         String str = "123456";
 //        NativeContent nativeContent = new NativeContent();
 //        String s = nativeContent.stringFromJNI();
