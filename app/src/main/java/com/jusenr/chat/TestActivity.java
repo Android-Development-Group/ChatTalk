@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import com.jusenr.chat.base.TitleActivity;
 import com.jusenr.chat.qrcode.QRActivity;
+import com.jusenr.chat.test.WebTestActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,6 +40,7 @@ public class TestActivity extends TitleActivity {
                 startActivity(QRActivity.class);
                 break;
             case R.id.btn_2:
+                startActivity(WebTestActivity.class);
                 break;
             case R.id.btn_3:
                 break;

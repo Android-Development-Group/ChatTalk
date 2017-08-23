@@ -106,7 +106,6 @@ public class MainActivity extends BaseActivity implements
         changeTextViewColor();
         changeSelectedTabState(0);
         initMainViewPager();
-//24:1F:A0:17:C1:37
     }
 
     private void initMainViewPager() {

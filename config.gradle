@@ -17,7 +17,7 @@ ext {
             minSdkVersion       : 19,
             targetSdkVersion    : 25,
             versionCode         : 4,
-            versionName         : "1.6.0",
+            versionName         : "2.0.0",
             applicationId       : "com.jusenr.chat",
             manifestPlaceholders: [UMENG_APPKEY_VALUE: "599ba26565b6d66b77001080",
                                    APP_ID            : "6666"]
@@ -34,6 +34,8 @@ ext {
             coreVersion               : "3.3.0",
             permissionVersion         : "1.0.7",
             ptlogVersion              : "1.0.0",
+            agentwebVersion           : "1.2.6",
+            tkrefreshlayoutVersion    : "1.0.7",
 
             rxjavaVersion             : "1.2.9",
             rxandroidVersion          : "1.2.1",
@@ -73,6 +75,8 @@ ext {
             core                        : "com.google.zxing:core:${versions["coreVersion"]}",
             permission                  : "com.yanzhenjie:permission:${versions["permissionVersion"]}",
             ptlog                       : "com.putao.mobile:ptlog:${versions["ptlogVersion"]}",
+            agentweb                    : "com.just.agentweb:agentweb:${versions["agentwebVersion"]}",
+            tkrefreshlayout             : "com.lcodecorex:tkrefreshlayout:${versions["tkrefreshlayoutVersion"]}",
 
             analytics                   : "com.umeng.analytics:analytics:latest.integration",
             crashreport                 : "com.tencent.bugly:crashreport:latest.release",

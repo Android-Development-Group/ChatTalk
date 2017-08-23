@@ -29,7 +29,8 @@
             android:id="@+id/btn_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="扫码"/>
+            android:text="WebTest"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/btn_3"

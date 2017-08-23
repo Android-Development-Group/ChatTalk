@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
  * @param <App>
  */
 public abstract class BaseActivity<App extends BaseApplication> extends AppCompatActivity {
-    public static final String TAG = BaseActivity.class.getSimpleName();
+    public static String TAG = BaseActivity.class.getSimpleName();
 
     private static final int WHAT_ON_HOME_CLICK = 0x1;
     protected Context mContext;
@@ -65,6 +65,7 @@ public abstract class BaseActivity<App extends BaseApplication> extends AppCompa
     final protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView();
+        TAG = getLocalClassName();
         ButterKnife.bind(this);
         mContext = this;
 

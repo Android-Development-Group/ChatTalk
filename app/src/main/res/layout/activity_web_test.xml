@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.jusenr.chat.test.WebTestActivity">
+
+    <!--标题栏-->
+    <com.jusenr.library.view.NavigationBar
+        style="@style/style_navigation_bar"
+        android:background="@color/transparent"
+        app:nav_left_icon="@drawable/back_selector_white"
+        app:nav_main_title="WebTest"
+        app:nav_right_title_color="@color/color_EBEBEB"/>
+
+</LinearLayout>

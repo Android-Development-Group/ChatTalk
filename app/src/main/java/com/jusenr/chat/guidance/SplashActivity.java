@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Observable.timer(5000, TimeUnit.MILLISECONDS)
+        Observable.timer(3000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.computation())
                 .subscribe(new Action1<Long>() {
                     @Override

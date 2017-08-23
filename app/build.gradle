@@ -147,9 +147,12 @@ dependencies {
     testCompile rootProject.ext.dependencies.leakcanary_android_no_op
     releaseCompile rootProject.ext.dependencies.leakcanary_android_no_op
 
+    compile rootProject.ext.dependencies.constraint_layout
     compile rootProject.ext.dependencies.permission
     compile rootProject.ext.dependencies.core
     compile rootProject.ext.dependencies.ptlog
+    compile rootProject.ext.dependencies.agentweb
+    compile rootProject.ext.dependencies.tkrefreshlayout
 
     annotationProcessor rootProject.ext.dependencies.butterknife_compiler
 }
