@@ -24,50 +24,81 @@ ext {
     ]
 
     versions = [
-            constraintVersion    : "1.0.2",
-            androidSupportVersion: "25.3.1",
+            junitVersion              : "4.12",
+            debugDbVersion            : "1.0.0",
+            leakcanaryVersion         : "1.5.1",
 
-            coreVersion          : "3.3.0",
-            permissionVersion    : "1.0.7",
-            ptlogVersion         : "1.0.0",
+            constraintVersion         : "1.0.2",
+            androidSupportVersion     : "25.3.1",
 
-            rxjavaVersion        : "1.2.9",
-            rxandroidVersion     : "1.2.1",
+            coreVersion               : "3.3.0",
+            permissionVersion         : "1.0.7",
+            ptlogVersion              : "1.0.0",
 
-            frescoVersion        : "1.2.0",
+            rxjavaVersion             : "1.2.9",
+            rxandroidVersion          : "1.2.1",
 
-            butterknifeVersion   : "8.5.1",
-            daggerVersion        : "2.10",
+            frescoVersion             : "1.2.0",
+
+            flexibledividerVersion    : "1.2.6",
+            recyclerviewheader2Version: "2.0.1",
+            ultraPtrVersion           : "1.0.9@aar",
+            picassoVersion            : "2.5.2",
+
+            fastjsonVersion           : "1.2.7",
+            gsonVersion               : "2.8.0",
+
+            multidexVersion           : "1.0.1",
+
+            butterknifeVersion        : "8.5.1",
+            daggerVersion             : "2.10",
     ]
 
     dependencies = [
-            //library
-            constraint_layout    : "com.android.support.constraint:constraint-layout:${versions["constraintVersion"]}",
-            appcompat_v7         : "com.android.support:appcompat-v7:${versions["androidSupportVersion"]}",
-            support_v13          : "com.android.support:support-v13:${versions["androidSupportVersion"]}",
-            support_annotations  : "com.android.support:support-annotations:${versions["androidSupportVersion"]}",
-            recyclerview_v7      : "com.android.support:recyclerview-v7:${versions["androidSupportVersion"]}",
-            cardview_v7          : "com.android.support:cardview-v7:${versions["androidSupportVersion"]}",
-            design               : "com.android.support:design:${versions["androidSupportVersion"]}",
-            percent              : "com.android.support:percent:${versions["androidSupportVersion"]}",
+            //test
+            junit                       : "junit:junit:${versions["junitVersion"]}",
+            debug_db                    : "com.amitshekhar.android:debug-db:${versions["debugDbVersion"]}",
+            leakcanary_android          : "com.squareup.leakcanary:leakcanary-android:${versions["leakcanaryVersion"]}",
+            leakcanary_android_no_op    : "com.squareup.leakcanary:leakcanary-android-no-op:${versions["leakcanaryVersion"]}",
 
-            core                 : "com.google.zxing:core:${versions["coreVersion"]}",
-            permission           : "com.yanzhenjie:permission:${versions["permissionVersion"]}",
-            ptlog                : "com.putao.mobile:ptlog:${versions["ptlogVersion"]}",
+            constraint_layout           : "com.android.support.constraint:constraint-layout:${versions["constraintVersion"]}",
+            appcompat_v7                : "com.android.support:appcompat-v7:${versions["androidSupportVersion"]}",
+            support_v13                 : "com.android.support:support-v13:${versions["androidSupportVersion"]}",
+            support_annotations         : "com.android.support:support-annotations:${versions["androidSupportVersion"]}",
+            recyclerview_v7             : "com.android.support:recyclerview-v7:${versions["androidSupportVersion"]}",
+            cardview_v7                 : "com.android.support:cardview-v7:${versions["androidSupportVersion"]}",
+            design                      : "com.android.support:design:${versions["androidSupportVersion"]}",
+            percent                     : "com.android.support:percent:${versions["androidSupportVersion"]}",
 
-            analytics            : "com.umeng.analytics:analytics:latest.integration",
+            core                        : "com.google.zxing:core:${versions["coreVersion"]}",
+            permission                  : "com.yanzhenjie:permission:${versions["permissionVersion"]}",
+            ptlog                       : "com.putao.mobile:ptlog:${versions["ptlogVersion"]}",
 
-            rxjava               : "io.reactivex:rxjava:${versions["rxjavaVersion"]}",
-            rxandroid            : "io.reactivex:rxandroid:${versions["rxandroidVersion"]}",
+            analytics                   : "com.umeng.analytics:analytics:latest.integration",
+            crashreport                 : "com.tencent.bugly:crashreport:latest.release",
+            nativecrashreport           : "com.tencent.bugly:nativecrashreport:latest.release",
 
-            fresco               : "com.facebook.fresco:fresco:${versions["frescoVersion"]}",
-            imagepipeline_okhttp3: "com.facebook.fresco:imagepipeline-okhttp3:${versions["frescoVersion"]}",
+            rxjava                      : "io.reactivex:rxjava:${versions["rxjavaVersion"]}",
+            rxandroid                   : "io.reactivex:rxandroid:${versions["rxandroidVersion"]}",
 
-            butterknife          : "com.jakewharton:butterknife:${versions["butterknifeVersion"]}",
-            dagger               : "com.google.dagger:dagger:${versions["daggerVersion"]}",
+            fresco                      : "com.facebook.fresco:fresco:${versions["frescoVersion"]}",
+            imagepipeline_okhttp3       : "com.facebook.fresco:imagepipeline-okhttp3:${versions["frescoVersion"]}",
+
+            recyclerview_flexibledivider: "com.yqritc:recyclerview-flexibledivider:${versions["flexibledividerVersion"]}",
+            recyclerviewheader2         : "com.bartoszlipinski:recyclerviewheader2:${versions["recyclerviewheader2Version"]}",
+            ultra_ptr                   : "in.srain.cube:ultra-ptr:${versions["ultraPtrVersion"]}",
+            picasso                     : "com.squareup.picasso:picasso:${versions["picassoVersion"]}",
+
+            fastjson                    : "com.alibaba:fastjson:${versions["fastjsonVersion"]}",
+            gson                        : "com.google.code.gson:gson:${versions["gsonVersion"]}",
+
+            multidex                    : "com.android.support:multidex:${versions["multidexVersion"]}",
+
+            butterknife                 : "com.jakewharton:butterknife:${versions["butterknifeVersion"]}",
+            dagger                      : "com.google.dagger:dagger:${versions["daggerVersion"]}",
 
             //annotationProcessor
-            butterknife_compiler : "com.jakewharton:butterknife-compiler:${versions["butterknifeVersion"]}",
-            dagger_compiler      : "com.google.dagger:dagger-compiler:${versions["daggerVersion"]}"
+            butterknife_compiler        : "com.jakewharton:butterknife-compiler:${versions["butterknifeVersion"]}",
+            dagger_compiler             : "com.google.dagger:dagger-compiler:${versions["daggerVersion"]}",
     ]
 }

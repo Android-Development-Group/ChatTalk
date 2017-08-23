@@ -11,6 +11,7 @@ import com.jusenr.library.utils.Logger;
 import com.jusenr.library.utils.SDCardUtils;
 import com.jusenr.library.view.fresco.ImagePipelineFactory;
 import com.putao.ptlog.PTLog;
+import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
@@ -30,6 +31,15 @@ public class TotalApplication extends BaseApplication {
     public void onCreate() {
         PTLog.init(getApplicationContext(), PTLog.DEBUG);
         super.onCreate();
+
+        //LeakCanary初始化
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
+
         //创建储存文件夹
         File appDir = new File(getSdCardPath());
         if (!appDir.exists()) {

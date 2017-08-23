@@ -137,16 +137,21 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
     compile project(':chat_library')
+
+    testCompile rootProject.ext.dependencies.junit
+    //查看App数据库使用(方法：1.放开注释 2.重新编译 3.使用'DebugDB'字段检索日志 4.访问检索到的连接，OK!)
+    debugCompile rootProject.ext.dependencies.debug_db
+
+    debugCompile rootProject.ext.dependencies.leakcanary_android
+    testCompile rootProject.ext.dependencies.leakcanary_android_no_op
+    releaseCompile rootProject.ext.dependencies.leakcanary_android_no_op
+
     compile rootProject.ext.dependencies.permission
     compile rootProject.ext.dependencies.core
     compile rootProject.ext.dependencies.ptlog
 
     annotationProcessor rootProject.ext.dependencies.butterknife_compiler
-
-    //查看App数据库使用(方法：1.放开注释 2.重新编译 3.使用'DebugDB'字段检索日志 4.访问检索到的连接，OK!)
-//    debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
 }
 
 //编译结束后删除unaligned包
