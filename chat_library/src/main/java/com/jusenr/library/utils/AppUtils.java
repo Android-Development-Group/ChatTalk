@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.net.Uri;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -49,6 +50,30 @@ public final class AppUtils {
      */
     public static String getDeviceName() {
         return android.os.Build.MODEL;
+    }
+
+    /**
+     * 获取手机IMEI号
+     *
+     * @param context
+     */
+    public static String getIMEI(Context context) {
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(context.TELEPHONY_SERVICE);
+        String imei = telephonyManager.getDeviceId();
+
+        return imei;
+    }
+
+    /**
+     * 获取手机IMSI号
+     *
+     * @param context
+     */
+    public static String getIMSI(Context context) {
+        TelephonyManager mTelephonyMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String imsi = mTelephonyMgr.getSubscriberId();
+
+        return imsi;
     }
 
 //    /**

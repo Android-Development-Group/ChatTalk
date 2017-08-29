@@ -3,9 +3,12 @@ package com.jusenr.chat;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.jusenr.library.utils.AppUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.BufferedReader;
@@ -66,6 +69,14 @@ public class MobClient {
             String device_id = null;
             if (checkPermission(context, Manifest.permission.READ_PHONE_STATE)) {
                 device_id = tm.getDeviceId();
+                Log.i("MobClient", "IMEI=" + device_id);
+
+                String imei = AppUtils.getIMEI(context);
+                String imsi = AppUtils.getIMSI(context);
+                Log.i("MobClient", "IMEI=" + imei);
+                Log.i("MobClient", "IMSI=" + imsi);
+                json.put("imei",imei);
+                json.put("imsi",imsi);
             }
             String mac = null;
             FileReader fstream = null;
@@ -97,6 +108,12 @@ public class MobClient {
                     }
                 }
             }
+            WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            String macAddress = wm.getConnectionInfo().getMacAddress();
+            Log.i("MobClient", "WLANMAC=" + macAddress);
+            json.put("wlanmac", macAddress);
+
+            Log.i("MobClient", "MAC=" + mac);
             json.put("mac", mac);
             if (TextUtils.isEmpty(device_id)) {
                 device_id = mac;
@@ -105,6 +122,7 @@ public class MobClient {
                 device_id = android.provider.Settings.Secure.getString(context.getContentResolver(),
                         android.provider.Settings.Secure.ANDROID_ID);
             }
+            Log.i("MobClient", "DEVICE_ID=" + device_id);
             json.put("device_id", device_id);
             return json.toString();
         } catch (Exception e) {

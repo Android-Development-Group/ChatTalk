@@ -23,6 +23,7 @@ import com.jusenr.chat.qrcodescan.CaptureActivity;
 import com.jusenr.chat.scanner.ScanQrCodeActivity;
 import com.jusenr.chat.utils.PermissionsUtils;
 import com.jusenr.library.controller.BaseActivity;
+import com.jusenr.library.utils.AppUtils;
 import com.jusenr.library.utils.ToastUtils;
 import com.jusenr.library.view.DragPointView;
 import com.putao.ptlog.PTLog;
@@ -97,7 +98,9 @@ public class MainActivity extends BaseActivity implements
         MobClient.onEvent(this, getLocalClassName());
         PTLog.i(TotalApplication.app_device_id);
         String deviceInfo = MobClient.getDeviceInfo(this);
-        PTLog.i(deviceInfo);
+        String deviceId = AppUtils.getRealDeviceId(this);
+        PTLog.i("deviceInfo=%s", deviceInfo);
+        PTLog.i("deviceId=%s", deviceId);
         String str = "123456";
 //        NativeContent nativeContent = new NativeContent();
 //        String s = nativeContent.stringFromJNI();
