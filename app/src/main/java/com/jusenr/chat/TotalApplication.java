@@ -60,7 +60,6 @@ public class TotalApplication extends BaseApplication {
         MobclickAgent.setCatchUncaughtExceptions(true);
         MobclickAgent.openActivityDurationTrack(false);
 
-        PTLog.e("umeng_appkey=%s", umeng_appkey);
         PTLog.e("umeng_channel=%s", umeng_channel);
     }
 
