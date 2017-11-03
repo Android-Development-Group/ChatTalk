@@ -153,6 +153,8 @@
         </activity>
         <activity android:name=".test.WebTestActivity">
         </activity>
+        <activity android:name="com.yanzhenjie.permission.PermissionActivity">
+        </activity>
     </application>
 
 </manifest>

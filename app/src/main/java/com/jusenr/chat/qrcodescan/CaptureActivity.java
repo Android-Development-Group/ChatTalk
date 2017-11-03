@@ -1,14 +1,19 @@
 package com.jusenr.chat.qrcodescan;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.text.TextUtils;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -19,18 +24,21 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jusenr.chat.MobClient;
 import com.jusenr.chat.R;
 import com.jusenr.chat.base.TitleActivity;
 import com.jusenr.chat.qrcode.QRResultActivity;
+import com.jusenr.chat.qrcodescan.bitmap.ImageUtil;
 import com.jusenr.chat.qrcodescan.camera.CameraManager;
 import com.jusenr.chat.qrcodescan.decode.CaptureActivityHandler;
 import com.jusenr.chat.qrcodescan.decode.InactivityTimer;
-import com.jusenr.library.utils.ToastUtils;
 import com.putao.ptlog.PTLog;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * 作者: 陈涛(1076559197@qq.com)
@@ -42,7 +50,7 @@ import java.io.IOException;
  * 描述: 扫描界面
  */
 public class CaptureActivity extends TitleActivity implements Callback {
-
+    private static final int REQUEST_SYSTEM_PICTURE = 0;
     private CaptureActivityHandler handler;
     private boolean hasSurface;
     private InactivityTimer inactivityTimer;
@@ -155,10 +163,51 @@ public class CaptureActivity extends TitleActivity implements Callback {
 
     }
 
+    private void openSystemAlbum() {
+        Intent intent = new Intent();
+        /* 开启Pictures画面Type设定为image */
+        intent.setType("image/*");
+        /* 使用Intent.ACTION_GET_CONTENT这个Action */
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        /* 取得相片后返回本画面 */
+        startActivityForResult(intent, REQUEST_SYSTEM_PICTURE);
+    }
+
+    public static final Bitmap getBitmap(ContentResolver cr, Uri url) throws FileNotFoundException, IOException {
+        InputStream input = cr.openInputStream(url);
+        Bitmap bitmap = BitmapFactory.decodeStream(input);
+        input.close();
+        return bitmap;
+    }
+
     @Override
     public void onRightAction() {
         super.onRightAction();
-        ToastUtils.showToastShort(this, "123");
+        openSystemAlbum();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        switch (requestCode) {
+            case REQUEST_SYSTEM_PICTURE:
+                Uri uri = data.getData();
+//                if (uri != null) {
+//                    Bitmap photoBmp = BitmapUtil.getBitmapFormUri(getApplicationContext(), uri);
+//                }
+                String imageAbsolutePath = ImageUtil.getImageAbsolutePath(getApplicationContext(), uri);
+                if (!TextUtils.isEmpty(imageAbsolutePath)) {
+                    String result = ImageUtil.getResult(imageAbsolutePath);
+                    if (!TextUtils.isEmpty(result)) {
+                        handleDecode(result);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "二维码错误", Toast.LENGTH_LONG).cancel();
+                    }
+                }
+                break;
+        }
     }
 
     @SuppressWarnings("deprecation")
