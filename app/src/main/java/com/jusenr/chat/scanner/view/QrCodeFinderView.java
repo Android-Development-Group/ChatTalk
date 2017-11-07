@@ -18,7 +18,10 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
@@ -37,6 +40,7 @@ public final class QrCodeFinderView extends RelativeLayout {
     private static final int[] SCANNER_ALPHA = {0, 64, 128, 192, 255, 192, 128, 64};
     private static final long ANIMATION_DELAY = 100L;//动画延迟
     private static final int OPAQUE = 0xFF;
+    private static final int color_transparent = 0x00000000;
 
     private Context mContext;
     private Rect mFrameRect;
@@ -139,15 +143,30 @@ public final class QrCodeFinderView extends RelativeLayout {
         if (frame == null) {
             return;
         }
-        drawBGRect(canvas, frame);
-        drawFocusRect(canvas, frame);
-        drawAngle(canvas, frame);
+//        drawBGRect(canvas, frame);
+
+        drawBGFullScreenRect(canvas, frame);
+
+        drawRoundRectForeground(canvas, frame);
+
+//        drawFocusRect(canvas, frame);
+//        drawAngle(canvas, frame);
+
 //        drawText(canvas, frame);
 //        drawLaser(canvas, frame);
 
         // Request another update at the animation interval, but only repaint the laser line,
         // not the entire viewfinder mask.
         postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top, frame.right, frame.bottom);
+    }
+
+    private void drawBGFullScreenRect(Canvas canvas, Rect rect) {
+        int width = canvas.getWidth();
+        int height = canvas.getHeight();
+        // 画笔颜色
+        mPaint.setColor(mMaskColor);
+
+        canvas.drawRect(0, 0, width, height, mPaint);
     }
 
     /**
@@ -161,9 +180,14 @@ public final class QrCodeFinderView extends RelativeLayout {
         int height = canvas.getHeight();
         // 画笔颜色
         mPaint.setColor(mMaskColor);
+
+        //上
         canvas.drawRect(0, 0, width, rect.top, mPaint);
+        //左
         canvas.drawRect(0, rect.top, rect.left, rect.bottom + 1, mPaint);
+        //右
         canvas.drawRect(rect.right + 1, rect.top, width, rect.bottom + 1, mPaint);
+        //下
         canvas.drawRect(0, rect.bottom + 1, width, height, mPaint);
     }
 
@@ -187,6 +211,27 @@ public final class QrCodeFinderView extends RelativeLayout {
         // 下
         canvas.drawRect(rect.left + mAngleLength, rect.bottom - mFocusThick, rect.right - mAngleLength, rect.bottom,
                 mPaint);
+    }
+
+    /**
+     * 绘制圆角取景框边框
+     *
+     * @return
+     */
+    private void drawRoundRectForeground(Canvas canvas, Rect frame) {
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.TRANSPARENT);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setAlpha(60);
+
+        //set mode为clear
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+
+        canvas.drawRoundRect(new RectF(frame.left, frame.top, frame.right, frame.bottom), dip2px(getContext(), 10f), dip2px(getContext(), 10f), paint);
+        paint.setXfermode(null);
+        paint.setAlpha(0);
+
     }
 
     /**
@@ -271,6 +316,14 @@ public final class QrCodeFinderView extends RelativeLayout {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
     public int getViewWidth() {
